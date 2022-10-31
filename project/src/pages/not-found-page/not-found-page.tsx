@@ -1,18 +1,14 @@
+import { Helmet } from 'react-helmet-async';
+import Header from '../../components/header/header';
 import { Link } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
 
 function NotFoundPage(): JSX.Element {
   return (
     <div className="page page--gray">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Helmet>
+        <title>404 Not Found</title>
+      </Helmet>
+      <Header />
       <main className="page__main page__main">
         <div
           style={{ margin: '100px auto', maxWidth: '500px', textAlign: 'center' }}
