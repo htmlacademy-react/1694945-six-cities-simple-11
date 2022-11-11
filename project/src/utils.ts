@@ -24,8 +24,7 @@ export const getSortedReviews = (reviews: Reviews): Reviews => {
   const sortedReviews = reviews.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-  if (reviews.length > REVIEWS_LIST_LENGTH) {
-    return sortedReviews.slice(REVIEWS_LIST_LENGTH);
-  }
-  return sortedReviews;
+  return reviews.length > REVIEWS_LIST_LENGTH
+    ? sortedReviews.slice(REVIEWS_LIST_LENGTH)
+    : sortedReviews;
 };
