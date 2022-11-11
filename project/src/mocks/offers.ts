@@ -1,5 +1,6 @@
-import {Offers} from '../types/offer';
-export const offers: Offers = [
+import { ZOOM_CITY } from '../const';
+import { Offer } from '../types/offer';
+export const offers: Offer[] = [
   {
     id: 1,
     isPremium: true,
@@ -20,17 +21,17 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg'
     },
     city: {
+      name: 'Amsterdam',
       location: {
-        zoom: 10,
-        latitude: 52.370216,
-        longitude: 4.895168
-      },
-      name: 'Amsterdam'
+        lat: 52.3740300,
+        lng: 4.8896900,
+        zoom: ZOOM_CITY,
+      }
     },
     location: {
       zoom: 8,
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948
+      lat: 52.3909553943508,
+      lng: 4.85309666406198
     }
   },
   {
@@ -53,17 +54,17 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-angelina.jpg'
     },
     city: {
+      name: 'Amsterdam',
       location: {
-        zoom: 10,
-        latitude: 52.370216,
-        longitude: 4.895168
-      },
-      name: 'Amsterdam'
+        lat: 52.3740300,
+        lng: 4.8896900,
+        zoom: ZOOM_CITY,
+      }
     },
     location: {
       zoom: 8,
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948
+      lat: 52.3909553943508,
+      lng: 4.85309666406198
     }
   },
   {
@@ -86,17 +87,17 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-max.jpg'
     },
     city: {
+      name: 'Amsterdam',
       location: {
-        zoom: 10,
-        latitude: 52.370216,
-        longitude: 4.895168
-      },
-      name: 'Amsterdam'
+        lat: 52.3740300,
+        lng: 4.8896900,
+        zoom: ZOOM_CITY,
+      }
     },
     location: {
       zoom: 8,
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
     }
   },
   {
@@ -119,17 +120,17 @@ export const offers: Offers = [
       avatarUrl: 'img/avatar-max.jpg'
     },
     city: {
+      name: 'Amsterdam',
       location: {
-        zoom: 10,
-        latitude: 52.370216,
-        longitude: 4.895168
-      },
-      name: 'Amsterdam'
+        lat: 52.3740300,
+        lng: 4.8896900,
+        zoom: ZOOM_CITY,
+      }
     },
     location: {
       zoom: 8,
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
     }
   }
 ];
