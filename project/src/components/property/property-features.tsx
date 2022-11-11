@@ -1,4 +1,4 @@
-import { AccomodationType } from '../../const';
+import { accomodationType } from '../../const';
 import { getPluralWord } from '../../utils';
 type PropertyFeaturesComponentProps = {
   type: string;
@@ -13,7 +13,7 @@ function PropertyFeatures({
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
-        {AccomodationType[type as keyof typeof AccomodationType]}
+        {accomodationType[type as keyof typeof accomodationType]}
       </li>
       <li className="property__feature property__feature--bedrooms">
         {`${bedrooms} ${getPluralWord(bedrooms, 'Bedroom')}`}
