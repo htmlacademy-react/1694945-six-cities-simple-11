@@ -1,3 +1,4 @@
+import {City} from './types/city';
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -9,12 +10,12 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-export enum AccomodationType {
-  apartment = 'Apartment',
-  room = 'Private room',
-  house = 'House',
-  hotel = 'Hotel',
-}
+export const accomodationType = {
+  apartment: 'Apartment',
+  room: 'Private room',
+  house: 'House',
+  hotel:'Hotel',
+};
 export const MARKS = Object.freeze([
   {
     key: 5,
@@ -37,14 +38,57 @@ export const MARKS = Object.freeze([
     value: 'terribly',
   },
 ]);
-export const CITIES = Object.freeze([
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-]);
+export const ZOOM_CITY = 10;
+export const CITIES: City[] = [
+  {
+    name: 'Paris',
+    location: {
+      lat: 48.8534100,
+      lng: 2.3488000,
+      zoom: ZOOM_CITY,
+    }
+  },
+  {
+    name: 'Cologne',
+    location: {
+      lat: 50.9333300,
+      lng: 6.9500000,
+      zoom: ZOOM_CITY,
+    }
+  },
+  {
+    name: 'Brussels',
+    location: {
+      lat: 50.8504500,
+      lng: 4.3487800,
+      zoom: ZOOM_CITY,
+    }
+  },
+  {
+    name: 'Amsterdam',
+    location: {
+      lat: 52.3740300,
+      lng: 4.8896900,
+      zoom: ZOOM_CITY,
+    }
+  },
+  {
+    name: 'Hamburg',
+    location: {
+      lat: 53.5753200,
+      lng: 10.0153400,
+      zoom: ZOOM_CITY,
+    }
+  },
+  {
+    name: 'Dusseldorf',
+    location:{
+      lat: 51.2217200,
+      lng: 6.7761600,
+      zoom: ZOOM_CITY,
+    }
+  }
+];
 export const ACTIVE_CITY = CITIES[3];
 export const SORT_TYPES = Object.freeze([
   'Popular',
