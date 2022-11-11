@@ -1,7 +1,7 @@
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import OfferCard from './offer-card';
 type OffersOtherComponentProps = {
-  offers: Offers;
+  offers: Offer[];
 };
 function OffersOther({ offers }: OffersOtherComponentProps): JSX.Element {
   const offerCardsList = offers.map(
