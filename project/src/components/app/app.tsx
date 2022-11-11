@@ -4,7 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 
 import { Offer } from '../../types/offer';
-import { Reviews } from '../../types/review';
+import { Review } from '../../types/review';
 
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -14,7 +14,7 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 type AppPageProps = {
   offers: Offer[];
-  reviews: Reviews;
+  reviews: Review[];
 };
 
 const IS_AUTHORIZED = true;
