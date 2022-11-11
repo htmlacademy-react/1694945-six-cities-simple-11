@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Offer } from '../../types/offer';
-import CardIsPremium from './card/card-is-premium';
+import CardPremiumMark from './card/card-premium-mark';
 import CardPreview from './card/card-preview';
 import CardPrice from './card/card-price';
 import CardRating from './card/card-rating';
@@ -24,7 +24,7 @@ function OfferCard(props: CardProps): JSX.Element {
       className="cities__card place-card"
       onMouseOver={mouseOverHandler}
     >
-      {isPremium && <CardIsPremium />}
+      {isPremium && <CardPremiumMark />}
       <CardPreview link={link} previewImage={previewImage} title={title} />
       <div className="place-card__info">
         <CardPrice price={price} />
