@@ -1,27 +1,26 @@
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
+import { City } from '../../types/city';
 import { SORT_TYPES, ACTIVE_SORT } from '../../const';
 import OfferCard from './offer-card';
+import { getPluralWord } from '../../utils';
 
 type OffersListComponentProps = {
-  offers: Offers;
-  city: string;
+  offers: Offer[];
+  city: City;
 };
 
 function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
-  const cardsList = offers.map((offer) => (
+  const cards = offers.map((offer) => (
     <OfferCard key={offer.id} offer={offer} />
   ));
-  const sortList = SORT_TYPES.map((type, index) => ({
-    id: index + 1,
-    value: type,
-  })).map((type) => (
+  const sorts = SORT_TYPES.map((type) => (
     <li
-      key={type.id}
+      key={type}
       className={`places__option
-        ${type.value === ACTIVE_SORT ? ' places__option--active' : ''}`}
+        ${type === ACTIVE_SORT ? ' places__option--active' : ''}`}
       tabIndex={0}
     >
-      {type.value}
+      {type}
     </li>
   ));
   return (
@@ -29,7 +28,7 @@ function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
-          {offers.length} {offers.length > 1 ? 'places' : 'place'} to stay in {city}
+          {offers.length} {getPluralWord(offers.length, 'place')} to stay in {city.name}
         </b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
@@ -40,11 +39,11 @@ function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
             </svg>
           </span>
           <ul className="places__options places__options--custom places__options--opened">
-            {sortList}
+            {sorts}
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {cardsList}
+          {cards}
         </div>
       </section>
       <div className="cities__right-section">
