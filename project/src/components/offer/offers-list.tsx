@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import { City } from '../../types/city';
 import { SORT_TYPES, ACTIVE_SORT } from '../../const';
 import OfferCard from './offer-card';
 import { getPluralWord } from '../../utils';
+import Map from '../../components/map/map';
 
 type OffersListComponentProps = {
   offers: Offer[];
@@ -10,8 +12,13 @@ type OffersListComponentProps = {
 };
 
 function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState(0);
   const cards = offers.map((offer) => (
-    <OfferCard key={offer.id} offer={offer} />
+    <OfferCard
+      key={offer.id}
+      offer={offer}
+      mouseOverHandler={() => setActiveCard(offer.id)}
+    />
   ));
   const sorts = SORT_TYPES.map((type) => (
     <li
@@ -23,6 +30,7 @@ function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
       {type}
     </li>
   ));
+
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
@@ -47,7 +55,11 @@ function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <Map
+          location={city.location}
+          offers={offers}
+          selectedOffer={activeCard}
+        />
       </div>
     </div>
   );
