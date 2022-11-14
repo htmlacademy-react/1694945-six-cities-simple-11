@@ -1,4 +1,4 @@
-import { ZOOM_CITY } from '../const';
+import { Zoom } from '../const';
 import { Offer } from '../types/offer';
 export const offers: Offer[] = [
   {
@@ -9,7 +9,7 @@ export const offers: Offer[] = [
     price: 120,
     rating: 4.8,
     previewImage: 'img/apartment-01.jpg',
-    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg'],
     bedrooms: 3,
     maxAdults: 4,
     goods: ['Wi-Fi', 'Heating', 'Kitchen' , 'Fridge', 'Washing Machine', ' Coffee machine', 'Dishwasher', 'Towels', 'Baby seat', 'Cable TV'],
@@ -25,11 +25,11 @@ export const offers: Offer[] = [
       location: {
         lat: 52.3740300,
         lng: 4.8896900,
-        zoom: ZOOM_CITY,
+        zoom: Zoom.ActiveCity,
       }
     },
     location: {
-      zoom: 8,
+      zoom: Zoom.Location,
       lat: 52.3909553943508,
       lng: 4.85309666406198
     }
@@ -58,12 +58,12 @@ export const offers: Offer[] = [
       location: {
         lat: 52.3740300,
         lng: 4.8896900,
-        zoom: ZOOM_CITY,
+        zoom: Zoom.ActiveCity,
       }
     },
     location: {
-      zoom: 8,
-      lat: 52.3909553943508,
+      zoom: Zoom.Location,
+      lat: 52.3609553943508,
       lng: 4.85309666406198
     }
   },
@@ -91,11 +91,11 @@ export const offers: Offer[] = [
       location: {
         lat: 52.3740300,
         lng: 4.8896900,
-        zoom: ZOOM_CITY,
+        zoom: Zoom.ActiveCity,
       }
     },
     location: {
-      zoom: 8,
+      zoom: Zoom.Location,
       lat: 52.3909553943508,
       lng: 4.929309666406198
     }
@@ -124,13 +124,13 @@ export const offers: Offer[] = [
       location: {
         lat: 52.3740300,
         lng: 4.8896900,
-        zoom: ZOOM_CITY,
+        zoom: Zoom.ActiveCity,
       }
     },
     location: {
-      zoom: 8,
-      lat: 52.3909553943508,
-      lng: 4.929309666406198
+      zoom: Zoom.Location,
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
     }
   }
 ];
