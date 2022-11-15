@@ -1,10 +1,10 @@
 import { calculateRatingWidth, formatDate } from '../../utils';
-import { Reviews } from '../../types/review';
+import { Review } from '../../types/review';
 import ReviewForm from './review/review-form';
 
 type PropertyReviewsComponentProps = {
   isAuthorized: boolean;
-  reviews: Reviews;
+  reviews: Review[];
 };
 
 function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsComponentProps): JSX.Element {

@@ -1,15 +1,6 @@
 import {User} from './user';
-type Location = {
-  zoom: number;
-  latitude: number;
-  longitude: number;
-};
-
-type City = {
-  name: string;
-  location: Location;
-};
-
+import {City} from './city';
+import {Location} from './location';
 export type Offer = {
   id: number;
   isPremium: boolean;
@@ -27,5 +18,3 @@ export type Offer = {
   city: City;
   location: Location;
 };
-
-export type Offers = Offer[];

@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { getSortedReviews } from '../../utils';
-import { Offer, Offers } from '../../types/offer';
-import { Reviews } from '../../types/review';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
 import PropertyGallery from '../../components/property/property-gallery';
-import PropertyIsPremium from '../../components/property/property-is-premium';
+import PropertyPremiumMark from '../../components/property/property-premium-mark';
 import PropertyReviews from '../../components/property/property-reviews';
 import PropertyTitle from '../../components/property/property-title';
 import PropertyRating from '../../components/property/property-rating';
@@ -18,8 +18,8 @@ import OffersOther from '../../components/offer/offers-other';
 
 type PropertyPageProps = {
   isAuthorized: boolean;
-  offers: Offers;
-  reviews: Reviews;
+  offers: Offer[];
+  reviews: Review[];
 };
 
 function PropertyPage({
@@ -46,23 +46,15 @@ function PropertyPage({
     host,
   } = foundOffer;
   const imagesList = images
-    .map((image, index) => ({
-      id: index + 1,
-      src: image,
-    }))
-    .map((image) => (
-      <div key={image.id} className="property__image-wrapper">
-        <img className="property__image" src={image.src} alt={`Img ${image.id}`} />
+    .map((image, index) => (
+      <div key={image} className="property__image-wrapper">
+        <img className="property__image" src={image} alt={`IMG_${index}`} />
       </div>
     ));
   const goodsList = goods
-    .map((good, index) => ({
-      id: index + 1,
-      name: good,
-    }))
     .map((good) => (
-      <li key={good.id} className="property__inside-item">
-        {good.name}
+      <li key={good} className="property__inside-item">
+        {good}
       </li>
     ));
   const otherOffers = offers.filter((offer) => offer.id !== Number(id));
@@ -78,7 +70,7 @@ function PropertyPage({
           <PropertyGallery gallery={imagesList} />
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium && <PropertyIsPremium />}
+              {isPremium && <PropertyPremiumMark />}
               <PropertyTitle title={title} />
               <PropertyRating rating={rating} />
               <PropertyFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults} />

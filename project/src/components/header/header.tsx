@@ -13,7 +13,7 @@ function Header({ isAuthorized }: HeaderComponentProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          {isAuthorized === undefined ? '' : <Nav isAuthorized={isAuthorized} />}
+          {isAuthorized && <Nav isAuthorized={isAuthorized} />}
         </div>
       </div>
     </header>

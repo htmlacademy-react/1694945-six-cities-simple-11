@@ -1,11 +1,11 @@
-import { AccomodationType } from '../../../const';
+import { ACCOMODAION_TYPES } from '../../../const';
 type CardTypeComponentProps = {
   type: string;
 };
 function CardType({ type }: CardTypeComponentProps) {
   return (
     <p className="place-card__type">
-      {AccomodationType[type as keyof typeof AccomodationType]}
+      {ACCOMODAION_TYPES[type as keyof typeof ACCOMODAION_TYPES]}
     </p>
   );
 }
