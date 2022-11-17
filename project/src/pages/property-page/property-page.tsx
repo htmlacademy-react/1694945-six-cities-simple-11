@@ -15,6 +15,7 @@ import PropertyPrice from '../../components/property/property-price';
 import PropertyGoods from '../../components/property/property-goods';
 import PropertyHost from '../../components/property/property-host';
 import OffersOther from '../../components/offer/offers-other';
+import Map from '../../components/map/map';
 
 type PropertyPageProps = {
   isAuthorized: boolean;
@@ -44,6 +45,7 @@ function PropertyPage({
     goods,
     description,
     host,
+    location
   } = foundOffer;
   const imagesList = images
     .map((image, index) => (
@@ -87,7 +89,12 @@ function PropertyPage({
               }
             </div>
           </div>
-          <section className="property__map map" />
+          <Map
+            className={'property__map map'}
+            location={location}
+            offers={offers}
+            selectedOffer={Number(id)}
+          />
         </section>
         <div className="container">
           <OffersOther offers={otherOffers} />
