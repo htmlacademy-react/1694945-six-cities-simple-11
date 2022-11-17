@@ -6,12 +6,12 @@ import CardRating from './card/card-rating';
 import CardName from './card/card-name';
 import CardType from './card/card-type';
 
-type CardComponentProps = {
+type CardProps = {
   offer: Offer;
   mouseOverHandler: () => void;
 };
 
-function OfferCard({ offer, mouseOverHandler }: CardComponentProps): JSX.Element {
+function OfferCard({ offer, mouseOverHandler }: CardProps): JSX.Element {
   const {
     id,
     previewImage,

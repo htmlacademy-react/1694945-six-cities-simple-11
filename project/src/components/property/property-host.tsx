@@ -1,13 +1,13 @@
 import { User } from '../../types/user';
 
-type PropertyHostComponentProps = {
+type PropertyHostProps = {
   host: User;
   description: string;
 };
 function PropertyHost({
   host,
   description,
-}: PropertyHostComponentProps): JSX.Element {
+}: PropertyHostProps): JSX.Element {
   const { isPro, avatarUrl, name } = host;
   return (
     <div className="property__host">

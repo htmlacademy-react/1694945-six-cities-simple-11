@@ -1,11 +1,11 @@
 import Logo from '../logo/logo';
 import Nav from '../nav/nav';
 
-type HeaderComponentProps = {
+type HeaderProps = {
   isAuthorized?: boolean;
 };
 
-function Header({ isAuthorized }: HeaderComponentProps): JSX.Element {
+function Header({ isAuthorized }: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">

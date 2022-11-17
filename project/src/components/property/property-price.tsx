@@ -1,7 +1,7 @@
-type PropertyPriceComponentProps = {
+type PropertyPriceProps = {
   price: number;
 };
-function PropertyPrice({ price }: PropertyPriceComponentProps): JSX.Element {
+function PropertyPrice({ price }: PropertyPriceProps): JSX.Element {
   return (
     <div className="property__price">
       <b className="property__price-value">€{price}</b>

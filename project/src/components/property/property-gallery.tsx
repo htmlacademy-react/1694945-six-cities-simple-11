@@ -1,7 +1,7 @@
-type PropertyGalleryComponentProps = {
+type PropertyGalleryProps = {
   gallery: JSX.Element[];
 };
-function PropertyGallery({ gallery }: PropertyGalleryComponentProps): JSX.Element {
+function PropertyGallery({ gallery }: PropertyGalleryProps): JSX.Element {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">{gallery}</div>

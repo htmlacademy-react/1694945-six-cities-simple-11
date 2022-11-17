@@ -1,8 +1,8 @@
 import { ACCOMODAION_TYPES } from '../../../const';
-type CardTypeComponentProps = {
+type CardTypeProps = {
   type: string;
 };
-function CardType({ type }: CardTypeComponentProps) {
+function CardType({ type }: CardTypeProps) {
   return (
     <p className="place-card__type">
       {ACCOMODAION_TYPES[type as keyof typeof ACCOMODAION_TYPES]}

@@ -1,9 +1,9 @@
 import { calculateRatingWidth } from '../../utils';
 
-type PropertyRatingComponentProps = {
+type PropertyRatingProps = {
   rating: number;
 };
-function PropertyRating({ rating }: PropertyRatingComponentProps): JSX.Element {
+function PropertyRating({ rating }: PropertyRatingProps): JSX.Element {
   return (
     <div className="property__rating rating">
       <div className="property__stars rating__stars">

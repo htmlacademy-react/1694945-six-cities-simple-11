@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import OfferCard from './offer-card';
-type OffersOtherComponentProps = {
+type OffersOtherProps = {
   offers: Offer[];
 };
-function OffersOther({ offers }: OffersOtherComponentProps): JSX.Element {
+function OffersOther({ offers }: OffersOtherProps): JSX.Element {
   const [, setActiveCard] = useState(0);
   const cards = offers.map((offer) => (
     <OfferCard
