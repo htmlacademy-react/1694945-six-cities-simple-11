@@ -1,7 +1,7 @@
-type NoOffersComponentProps = {
+type NoOffersProps = {
   city: string;
 };
-function NoOffers({ city }: NoOffersComponentProps): JSX.Element {
+function NoOffers({ city }: NoOffersProps): JSX.Element {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

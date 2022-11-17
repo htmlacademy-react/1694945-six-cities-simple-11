@@ -2,12 +2,12 @@ import { calculateRatingWidth, formatDate } from '../../utils';
 import { Review } from '../../types/review';
 import ReviewForm from './review/review-form';
 
-type PropertyReviewsComponentProps = {
+type PropertyReviewsProps = {
   isAuthorized: boolean;
   reviews: Review[];
 };
 
-function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsComponentProps): JSX.Element {
+function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsProps): JSX.Element {
   const reviewsList = reviews.map((review) => (
     <li key={review.id} className="reviews__item">
       <div className="reviews__user user">

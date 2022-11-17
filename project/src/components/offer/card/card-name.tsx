@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
-type CardNameComponentProps = {
+type CardNameProps = {
   link: string;
   title: string;
 };
 
-function CardName({ link, title }: CardNameComponentProps) {
+function CardName({ link, title }: CardNameProps) {
   return (
     <h2 className="place-card__name">
       <Link to={link}>

@@ -6,12 +6,12 @@ import OfferCard from './offer-card';
 import { getPluralWord } from '../../utils';
 import Map from '../../components/map/map';
 
-type OffersListComponentProps = {
+type OffersListProps = {
   offers: Offer[];
   city: City;
 };
 
-function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
+function OffersList({ offers, city }: OffersListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
   const cards = offers.map((offer) => (
     <OfferCard
@@ -56,6 +56,7 @@ function OffersList({ offers, city }: OffersListComponentProps): JSX.Element {
       </section>
       <div className="cities__right-section">
         <Map
+          className={'cities__map map'}
           location={city.location}
           offers={offers}
           selectedOffer={activeCard}

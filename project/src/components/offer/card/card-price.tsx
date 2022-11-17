@@ -1,7 +1,7 @@
-type CardPriceComponentProps = {
+type CardPriceProps = {
   price: number;
 };
-function CardPrice({ price }: CardPriceComponentProps) {
+function CardPrice({ price }: CardPriceProps) {
   return (
     <div className="place-card__price-wrapper">
       <div className="place-card__price">

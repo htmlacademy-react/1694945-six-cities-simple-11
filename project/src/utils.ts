@@ -1,6 +1,7 @@
 import {
   FormatDate,
-  ReviewData,
+  Rating,
+  REVIEWS_LIST_LENGTH
 } from './const';
 import { Review } from './types/review';
 
@@ -20,13 +21,13 @@ export const formatDate = (
   });
 
 export const calculateRatingWidth = (rating: number): string =>
-  rating <= ReviewData.RatingMax ? `${rating * ReviewData.RatingValue}%` : '0%';
+  rating <= Rating.Max ? `${rating * Rating.MultiplyValue}%` : '0%';
 
 export const getSortedReviews = (reviews: Review[]): Review[] => {
   const sortedReviews = reviews.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-  return reviews.length > ReviewData.ListLength
-    ? sortedReviews.slice(ReviewData.ListLength)
+  return reviews.length > REVIEWS_LIST_LENGTH
+    ? sortedReviews.slice(REVIEWS_LIST_LENGTH)
     : sortedReviews;
 };

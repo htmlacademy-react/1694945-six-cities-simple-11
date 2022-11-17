@@ -1,9 +1,9 @@
 import { calculateRatingWidth } from '../../../utils';
 
-type CardRatingComponentProps = {
+type CardRatingProps = {
   rating: number;
 };
-function CardRating({ rating }: CardRatingComponentProps) {
+function CardRating({ rating }: CardRatingProps) {
   return (
     <div className="place-card__rating rating">
       <div className="place-card__stars rating__stars">

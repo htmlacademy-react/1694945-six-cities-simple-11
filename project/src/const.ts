@@ -14,9 +14,11 @@ export enum Zoom {
   ActiveCity = 10,
   Location = 8,
 }
-export enum Icon {
-  DefaultURL = './img/pin.svg',
-  ActiveURL = './img/pin-active.svg',
+export enum IconUrl {
+  Default = './img/pin.svg',
+  Active = './img/pin-active.svg',
+}
+export enum IconDimension {
   Width = 28,
   Height = 40,
   AnchorWidth = 14,
@@ -26,16 +28,15 @@ export enum FormatDate {
   Month = 'long',
   Year = 'numeric',
 }
-export enum ReviewData {
-  ListLength = 10,
-  RatingMax = 5,
-  RatingValue = 20,
+export enum Rating {
+  Max = 5,
+  MultiplyValue = 20,
 }
 export const ACCOMODAION_TYPES = Object.freeze({
   apartment: 'Apartment',
   room: 'Private room',
   house: 'House',
-  hotel:'Hotel',
+  hotel: 'Hotel',
 });
 export const MARKS = Object.freeze([
   {
@@ -118,6 +119,7 @@ export const SORT_TYPES = Object.freeze([
   'Top rated first',
 ]);
 export const ACTIVE_SORT = SORT_TYPES[0];
+export const REVIEWS_LIST_LENGTH = 10;
 export const LAYER_OPTION = {
   url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',

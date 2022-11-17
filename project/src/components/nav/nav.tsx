@@ -1,10 +1,10 @@
 import { AppRoute } from '../../const';
 
-type NavComponentProps = {
+type NavProps = {
   isAuthorized: boolean;
 };
 
-function Nav({ isAuthorized }: NavComponentProps): JSX.Element {
+function Nav({ isAuthorized }: NavProps): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

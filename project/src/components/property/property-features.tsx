@@ -1,6 +1,6 @@
 import { ACCOMODAION_TYPES } from '../../const';
 import { getPluralWord } from '../../utils';
-type PropertyFeaturesComponentProps = {
+type PropertyFeaturesProps = {
   type: string;
   bedrooms: number;
   maxAdults: number;
@@ -9,7 +9,7 @@ function PropertyFeatures({
   type,
   bedrooms,
   maxAdults,
-}: PropertyFeaturesComponentProps): JSX.Element {
+}: PropertyFeaturesProps): JSX.Element {
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
