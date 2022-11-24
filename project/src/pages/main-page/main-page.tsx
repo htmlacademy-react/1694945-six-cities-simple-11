@@ -3,8 +3,10 @@ import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offer/offers-list';
 import NoOffers from '../../components/offer/no-offers';
+import Locations from '../../components/locations/locations';
 import { Offer } from '../../types/offer';
-import { CITIES, ACTIVE_CITY } from '../../const';
+
+import { ACTIVE_CITY } from '../../const';
 
 type MainPageProps = {
   offers: Offer[];
@@ -17,17 +19,6 @@ function MainPage({ isAuthorized, offers }: MainPageProps): JSX.Element {
     filteredOffers.length > 0
       ? 'page page--gray page--main'
       : 'page__main page__main--index page__main--index-empty';
-  const citiesList = CITIES.map((city) => (
-    <li key={city.name} className="locations__item">
-      <a
-        className={`locations__item-link tabs__item
-          ${city.name === ACTIVE_CITY.name ? ' tabs__item--active' : ''}`}
-        href="#todo"
-      >
-        <span>{city.name}</span>
-      </a>
-    </li>
-  ));
   const offersList =
     offers.length > 0
       ? <OffersList offers={offers} city={ACTIVE_CITY} />
@@ -42,11 +33,7 @@ function MainPage({ isAuthorized, offers }: MainPageProps): JSX.Element {
       <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {citiesList}
-            </ul>
-          </section>
+          <Locations />
         </div>
         <div className="cities">
           {offersList}
