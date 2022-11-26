@@ -1,13 +1,25 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity } from './actions';
-import { ACTIVE_CITY } from '../const';
+import { changeCity, updateOffersList } from './actions';
+import { CITIES, ACTIVE_CITY } from '../const';
+import { OFFERS } from '../mocks/offers';
+import { REVIEWS } from '../mocks/reviews';
+import { getOffersByCity } from '../utils';
 
 const initialState = {
-  city: ACTIVE_CITY,
+  cities: CITIES,
+  activeCity: ACTIVE_CITY,
+  allOffers: OFFERS,
+  offers: getOffersByCity(OFFERS, ACTIVE_CITY.name),
+  reviews: REVIEWS,
 };
 
 const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(changeCity, (state) => state);
+  builder.addCase(changeCity, (state, action) => {
+    state.activeCity = action.payload;
+  });
+  builder.addCase(updateOffersList, (state) => {
+    state.offers = getOffersByCity(state.allOffers, state.activeCity.name);
+  });
 });
 
 export { reducer };
