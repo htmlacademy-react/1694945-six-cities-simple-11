@@ -1,5 +1,5 @@
 import { Review } from '../types/review';
-export const reviews: Review[] = [
+export const REVIEWS: Review[] = [
   {
     id: 1,
     offerId: 1,
