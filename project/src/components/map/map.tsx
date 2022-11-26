@@ -37,10 +37,19 @@ const activeMarkerIcon = createMarkerIcon(
   IconDimension.AnchorWidth
 );
 function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Element {
+  const { lat, lng, zoom } = location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
   useEffect(() => {
     if (map) {
+      const markerGroup = leaflet.layerGroup().addTo(map);
+      map.setView(
+        {
+          lat,
+          lng
+        },
+        zoom
+      );
       offers.forEach((offer) => {
         leaflet
           .marker(
@@ -54,10 +63,13 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
                 : defaultMarkerIcon
             }
           )
-          .addTo(map);
+          .addTo(markerGroup);
       });
+      return () => {
+        markerGroup.clearLayers();
+      };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, lat, lng, zoom, offers, selectedOffer]);
 
   return (
     <section
