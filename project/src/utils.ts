@@ -1,6 +1,4 @@
 import { FormatDate, Rating, REVIEWS_LIST_LENGTH } from './const';
-import { offers } from './mocks/offers';
-import { City } from './types/city';
 import { Offer } from './types/offer';
 import { Review } from './types/review';
 
@@ -13,8 +11,8 @@ export const formatDate = (date: string, locales = FormatDate.Locale): string =>
     year: FormatDate.Year,
   });
 
-export const getOffersByCity = (city: City): Offer[] =>
-  offers.filter((offer)=>offer.city.name === city.name);
+export const getOffersByCity = (offers: Offer[], city: string): Offer[] =>
+  offers.filter((offer) => offer.city.name === city);
 
 export const calculateRatingWidth = (rating: number): string =>
   rating <= Rating.Max ? `${rating * Rating.MultiplyValue}%` : '0%';
