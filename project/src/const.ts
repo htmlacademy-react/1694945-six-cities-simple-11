@@ -111,7 +111,7 @@ export const CITIES: City[] = [
     }
   }
 ];
-export const ACTIVE_CITY = CITIES[3];
+export const ACTIVE_CITY = CITIES[0];
 export const SORT_TYPES = Object.freeze([
   'Popular',
   'Price: low to high',
