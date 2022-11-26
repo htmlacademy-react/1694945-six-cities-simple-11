@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { getSortedReviews } from '../../utils';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
 import PropertyGallery from '../../components/property/property-gallery';
@@ -19,16 +18,11 @@ import Map from '../../components/map/map';
 
 type PropertyPageProps = {
   isAuthorized: boolean;
-  offers: Offer[];
-  reviews: Review[];
 };
 
-function PropertyPage({
-  isAuthorized,
-  offers,
-  reviews
-}: PropertyPageProps): JSX.Element {
+function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
   const { id } = useParams();
+  const offers = useAppSelector((state) => state.allOffers);
   const foundOffer = offers.find((offer) => offer.id === Number(id)) as Offer;
   if (foundOffer === undefined) {
     return <NotFoundPage />;
@@ -59,8 +53,12 @@ function PropertyPage({
         {good}
       </li>
     ));
-  const otherOffers = offers.filter((offer) => offer.id !== Number(id));
-  const foundReviews = reviews.filter((review) => review.offerId === Number(id));
+  const otherOffers = offers.filter(
+    (offer) =>
+      offer.id !== Number(id)
+      &&
+      offer.city.name === foundOffer.city.name
+  );
   return (
     <div className="page">
       <Helmet>
@@ -80,27 +78,31 @@ function PropertyPage({
               <PropertyGoods goods={goodsList} />
               <PropertyHost host={host} description={description} />
               {
-                foundReviews.length > 0
-                &&
                 <PropertyReviews
                   isAuthorized={isAuthorized}
-                  reviews={getSortedReviews(foundReviews)}
+                  offerId={Number(id)}
                 />
               }
             </div>
           </div>
-          <Map
-            className={'property__map map'}
-            location={location}
-            offers={offers}
-            selectedOffer={Number(id)}
-          />
+          {
+            otherOffers.length > 0 &&
+            <Map
+              className={'property__map map'}
+              location={location}
+              offers={offers}
+              selectedOffer={Number(id)}
+            />
+          }
         </section>
-        <div className="container">
-          <OffersOther offers={otherOffers} />
-        </div>
+        {
+          otherOffers.length > 0 &&
+          <div className="container">
+            <OffersOther offers={otherOffers} />
+          </div>
+        }
       </main>
-    </div >
+    </div>
   );
 }
 
