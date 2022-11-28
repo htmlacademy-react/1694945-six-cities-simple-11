@@ -1,12 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, updateOffersList } from './actions';
-import { CITIES, ACTIVE_CITY } from '../const';
+import { ACTIVE_CITY } from '../const';
 import { OFFERS } from '../mocks/offers';
 import { REVIEWS } from '../mocks/reviews';
 import { getOffersByCity } from '../utils';
 
 const initialState = {
-  cities: CITIES,
   activeCity: ACTIVE_CITY,
   allOffers: OFFERS,
   offers: getOffersByCity(OFFERS, ACTIVE_CITY.name),
