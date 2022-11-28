@@ -18,6 +18,7 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
       key={offer.id}
       offer={offer}
       mouseOverHandler={() => setActiveCard(offer.id)}
+      mouseOutHandler={() => setActiveCard(0)}
     />
   ));
   const sorts = SORT_TYPES.map((type) => (
