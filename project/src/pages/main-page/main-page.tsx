@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { CITIES } from '../../const';
 import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
@@ -10,7 +11,6 @@ type MainPageProps = {
 };
 
 function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
-  const cities = useAppSelector((state) => state.cities);
   const offers = useAppSelector((state) => state.offers);
   const mainClassName =
     offers.length > 0
@@ -26,7 +26,7 @@ function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
       <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Cities cities={cities} />
+          <Cities cities={CITIES} />
         </div>
         <div className="cities">
           <OffersSection offers={offers} />
