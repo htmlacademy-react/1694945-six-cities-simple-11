@@ -1,6 +1,6 @@
 import { Zoom } from '../const';
 import { Offer } from '../types/offer';
-export const offers: Offer[] = [
+export const OFFERS: Offer[] = [
   {
     id: 1,
     isPremium: true,

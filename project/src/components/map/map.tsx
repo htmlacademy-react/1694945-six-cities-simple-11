@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { IconUrl, IconDimension } from '../../const';
-import useMap from '../../hooks/use-map/use-map';
+import useMap from '../../hooks/use-map';
 import { Location } from '../../types/location';
 import { Offer } from '../../types/offer';
 
@@ -37,10 +37,19 @@ const activeMarkerIcon = createMarkerIcon(
   IconDimension.AnchorWidth
 );
 function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Element {
+  const { lat, lng, zoom } = location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
   useEffect(() => {
     if (map) {
+      const markerGroup = leaflet.layerGroup().addTo(map);
+      map.setView(
+        {
+          lat,
+          lng
+        },
+        zoom
+      );
       offers.forEach((offer) => {
         leaflet
           .marker(
@@ -54,10 +63,13 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
                 : defaultMarkerIcon
             }
           )
-          .addTo(map);
+          .addTo(markerGroup);
       });
+      return () => {
+        markerGroup.clearLayers();
+      };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, lat, lng, zoom, offers, selectedOffer]);
 
   return (
     <section

@@ -2,24 +2,14 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
-
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
-
-type AppPageProps = {
-  offers: Offer[];
-  reviews: Review[];
-};
-
 const IS_AUTHORIZED = true;
 
-function App({ offers, reviews }: AppPageProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -32,7 +22,6 @@ function App({ offers, reviews }: AppPageProps): JSX.Element {
               >
                 <MainPage
                   isAuthorized={IS_AUTHORIZED}
-                  offers={offers}
                 />
               </PrivateRoute>
             }
@@ -49,8 +38,6 @@ function App({ offers, reviews }: AppPageProps): JSX.Element {
               >
                 <PropertyPage
                   isAuthorized={IS_AUTHORIZED}
-                  offers={offers}
-                  reviews={reviews}
                 />
               </PrivateRoute>
             }

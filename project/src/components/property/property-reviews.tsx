@@ -1,14 +1,20 @@
-import { calculateRatingWidth, formatDate } from '../../utils';
-import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { calculateRatingWidth, formatDate, getSortedReviews } from '../../utils';
 import ReviewForm from './review/review-form';
 
 type PropertyReviewsProps = {
   isAuthorized: boolean;
-  reviews: Review[];
+  offerId: number;
 };
 
-function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsProps): JSX.Element {
-  const reviewsList = reviews.map((review) => (
+function PropertyReviews({ isAuthorized, offerId }: PropertyReviewsProps): JSX.Element | null {
+  const reviews = useAppSelector((state) => state.reviews);
+  const foundReviews = reviews.filter((review) => review.offerId === offerId);
+  if (foundReviews.length === 0) {
+    return null;
+  }
+  const sortedReviews = getSortedReviews(foundReviews);
+  const reviewsList = sortedReviews.map((review) => (
     <li key={review.id} className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -42,7 +48,7 @@ function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsProps): JSX.E
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
-        Reviews · <span className="reviews__amount">{reviews.length}</span>
+        Reviews · <span className="reviews__amount">{foundReviews.length}</span>
       </h2>
       <ul className="reviews__list">
         {reviewsList}
