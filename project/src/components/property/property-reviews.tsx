@@ -14,7 +14,7 @@ function PropertyReviews({ isAuthorized, offerId }: PropertyReviewsProps): JSX.E
     return null;
   }
   const sortedReviews = getSortedReviews(foundReviews);
-  const reviewsList = sortedReviews.map((review) => (
+  const reviewsListItems = sortedReviews.map((review) => (
     <li key={review.id} className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -51,7 +51,7 @@ function PropertyReviews({ isAuthorized, offerId }: PropertyReviewsProps): JSX.E
         Reviews · <span className="reviews__amount">{foundReviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviewsList}
+        {reviewsListItems}
       </ul>
       {isAuthorized && <ReviewForm />}
     </section>
