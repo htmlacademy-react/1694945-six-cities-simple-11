@@ -14,6 +14,29 @@ export const formatDate = (date: string, locales = FormatDate.Locale): string =>
 export const getOffersByCity = (offers: Offer[], city: string): Offer[] =>
   offers.filter((offer) => offer.city.name === city);
 
+export const orderOffersByType = (offers: Offer[], type: string) => {
+  switch (type) {
+    case 'Popular':
+      return [...offers].sort(
+        (offerA, offerB) => offerA.id - offerB.id
+      );
+    case 'Price: low to high':
+      return [...offers].sort(
+        (offerA, offerB) => offerA.price - offerB.price
+      );
+    case 'Price: high to low':
+      return [...offers].sort(
+        (offerA, offerB) => offerB.price - offerA.price
+      );
+    case 'Top rated first':
+      return [...offers].sort(
+        (offerA, offerB) => offerB.rating - offerA.rating
+      );
+    default:
+      return [...offers];
+  }
+};
+
 export const calculateRatingWidth = (rating: number): string =>
   rating <= Rating.Max ? `${rating * Rating.MultiplyValue}%` : '0%';
 
