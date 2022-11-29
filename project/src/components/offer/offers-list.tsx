@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import { City } from '../../types/city';
-import { SORT_TYPES, ACTIVE_SORT } from '../../const';
+import { SORT_TYPES } from '../../const';
 import OfferCard from './offer-card';
+import OffersSort from './offers-sort';
 import { getPluralWord } from '../../utils';
 import Map from '../../components/map/map';
 
@@ -18,19 +19,9 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
       key={offer.id}
       offer={offer}
       mouseOverHandler={() => setActiveCard(offer.id)}
+      mouseOutHandler={() => setActiveCard(0)}
     />
   ));
-  const sorts = SORT_TYPES.map((type) => (
-    <li
-      key={type}
-      className={`places__option
-        ${type === ACTIVE_SORT ? ' places__option--active' : ''}`}
-      tabIndex={0}
-    >
-      {type}
-    </li>
-  ));
-
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
@@ -38,18 +29,9 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
         <b className="places__found">
           {offers.length} {getPluralWord(offers.length, 'place')} to stay in {city.name}
         </b>
-        <form className="places__sorting" action="#" method="get">
-          <span className="places__sorting-caption">Sort by</span>
-          <span className="places__sorting-type" tabIndex={0}>
-            Popular
-            <svg className="places__sorting-arrow" width="7" height="4">
-              <use xlinkHref="#icon-arrow-select"></use>
-            </svg>
-          </span>
-          <ul className="places__options places__options--custom places__options--opened">
-            {sorts}
-          </ul>
-        </form>
+        <OffersSort
+          sortTypes={SORT_TYPES}
+        />
         <div className="cities__places-list places__list tabs__content">
           {cards}
         </div>

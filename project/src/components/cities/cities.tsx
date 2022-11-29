@@ -1,7 +1,7 @@
 import { City } from '../../types/city';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { changeCity, updateOffersList } from '../../store/actions';
+import { changeCity } from '../../store/actions';
 
 type CitiesProps = {
   cities: City[];
@@ -10,7 +10,7 @@ type CitiesProps = {
 function Cities({ cities }: CitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.activeCity);
-  const locationsList = cities.map((city) => {
+  const citiesListItems = cities.map((city) => {
     const isActiveCity = city.name === currentCity.name;
     return (
       <li key={city.name} className="locations__item">
@@ -20,7 +20,6 @@ function Cities({ cities }: CitiesProps): JSX.Element {
           onClick={(event) => {
             event.preventDefault();
             dispatch(changeCity(city));
-            dispatch(updateOffersList());
           }}
         >
           <span>{city.name}</span>
@@ -32,7 +31,7 @@ function Cities({ cities }: CitiesProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {locationsList}
+        {citiesListItems}
       </ul>
     </section>
   );

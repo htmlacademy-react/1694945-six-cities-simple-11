@@ -22,7 +22,7 @@ type PropertyPageProps = {
 
 function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
   const { id } = useParams();
-  const offers = useAppSelector((state) => state.allOffers);
+  const offers = useAppSelector((state) => state.offers);
   const foundOffer = offers.find((offer) => offer.id === Number(id)) as Offer;
   if (foundOffer === undefined) {
     return <NotFoundPage />;
