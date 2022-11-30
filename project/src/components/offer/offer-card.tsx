@@ -8,14 +8,14 @@ import CardType from './card/card-type';
 
 type CardProps = {
   offer: Offer;
-  mouseOverHandler: () => void;
-  mouseOutHandler: () => void;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
 };
 
 function OfferCard({
   offer,
-  mouseOverHandler,
-  mouseOutHandler
+  onMouseOver,
+  onMouseOut
 }: CardProps): JSX.Element {
   const {
     id,
@@ -30,8 +30,8 @@ function OfferCard({
   return (
     <article
       className="cities__card place-card"
-      onMouseOver={mouseOverHandler}
-      onMouseOut={mouseOutHandler}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
     >
       {isPremium && <CardPremiumMark />}
       <CardPreview

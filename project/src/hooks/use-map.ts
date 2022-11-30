@@ -12,11 +12,11 @@ export default function useMap(
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
-      const { lat, lng, zoom } = location;
+      const { latitude, longitude, zoom } = location;
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat,
-          lng
+          lat: latitude,
+          lng: longitude
         },
         zoom
       });

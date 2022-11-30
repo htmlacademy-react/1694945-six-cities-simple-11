@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { setActiveSort } from '../../store/actions';
 
 type OffersSortProps = {
   sortTypes: readonly string[];
+  activeSort: string;
 };
 
-function OfferSort({ sortTypes }: OffersSortProps): JSX.Element {
-  const activeSort = useAppSelector((state) => state.activeSort);
+function OffersSort({ sortTypes, activeSort }: OffersSortProps): JSX.Element {
   const [isMenuOpened, openMenu] = useState(false);
   const dispatch = useAppDispatch();
   return (
@@ -54,4 +53,4 @@ function OfferSort({ sortTypes }: OffersSortProps): JSX.Element {
     </form >
   );
 }
-export default OfferSort;
+export default OffersSort;
