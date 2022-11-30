@@ -7,7 +7,7 @@ type OffersSortProps = {
   sortTypes: readonly string[];
 };
 
-function OfferSort({ sortTypes }: OffersSortProps): JSX.Element {
+function OffersSort({ sortTypes }: OffersSortProps): JSX.Element {
   const activeSort = useAppSelector((state) => state.activeSort);
   const [isMenuOpened, openMenu] = useState(false);
   const dispatch = useAppDispatch();
@@ -54,4 +54,4 @@ function OfferSort({ sortTypes }: OffersSortProps): JSX.Element {
     </form >
   );
 }
-export default OfferSort;
+export default OffersSort;
