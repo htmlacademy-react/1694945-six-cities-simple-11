@@ -10,8 +10,8 @@ function OffersOther({ offers }: OffersOtherProps): JSX.Element {
     <OfferCard
       key={offer.id}
       offer={offer}
-      mouseOverHandler={() => setActiveCard(offer.id)}
-      mouseOutHandler={() => setActiveCard(0)}
+      onMouseOver={() => setActiveCard(offer.id)}
+      onMouseOut={() => setActiveCard(0)}
     />
   ));
   return (
