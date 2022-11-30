@@ -1,10 +1,14 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { store } from '../../store/store';
+import { fetchOffersAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import getSortedOffers from '../../store/selectors';
+import { getSortedOffers } from '../../store/selectors';
 import { CITIES } from '../../const';
 import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
+import Loader from '../../components/loader/loader';
 import OffersSection from '../../components/offer/offers-section';
 
 type MainPageProps = {
@@ -12,6 +16,9 @@ type MainPageProps = {
 };
 
 function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
+  useEffect(() => {
+    store.dispatch(fetchOffersAction());
+  }, []);
   const offers = useAppSelector(getSortedOffers);
   const activeCity = useAppSelector((state) => state.activeCity);
   const mainClassName =
@@ -34,10 +41,15 @@ function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
           />
         </div>
         <div className="cities">
-          <OffersSection
-            activeCity={activeCity}
-            offers={offers}
-          />
+          {
+            offers.length === 0
+              ? <Loader />
+              :
+              <OffersSection
+                activeCity={activeCity}
+                offers={offers}
+              />
+          }
         </div>
       </main>
     </div>
