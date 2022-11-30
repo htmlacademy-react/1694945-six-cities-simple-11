@@ -124,3 +124,5 @@ export const LAYER_OPTION = {
   url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 };
+export const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
+export const REQUEST_TIMEOUT = 5000;
