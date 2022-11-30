@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { Offer } from '../../types/offer';
+import { OTHER_OFFERS_LIST_LENGTH } from '../../const';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
 import PropertyGallery from '../../components/property/property-gallery';
@@ -23,7 +23,7 @@ type PropertyPageProps = {
 function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
   const { id } = useParams();
   const offers = useAppSelector((state) => state.offers);
-  const foundOffer = offers.find((offer) => offer.id === Number(id)) as Offer;
+  const foundOffer = offers.find((offer) => offer.id === Number(id));
   if (foundOffer === undefined) {
     return <NotFoundPage />;
   }
@@ -54,11 +54,8 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
       </li>
     ));
   const otherOffers = offers.filter(
-    (offer) =>
-      offer.id !== Number(id)
-      &&
-      offer.city.name === foundOffer.city.name
-  );
+    (offer) => offer.id !== Number(id) && offer.city.name === foundOffer.city.name
+  ).slice(0, OTHER_OFFERS_LIST_LENGTH);
   return (
     <div className="page">
       <Helmet>
@@ -90,7 +87,7 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
             <Map
               className={'property__map map'}
               location={location}
-              offers={offers}
+              offers={[...otherOffers, foundOffer]}
               selectedOffer={Number(id)}
             />
           }
