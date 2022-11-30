@@ -124,6 +124,7 @@ export const SORT_TYPES = Object.freeze([
   'Top rated first',
 ]);
 export const ACTIVE_SORT = SORT_TYPES[0];
+export const OTHER_OFFERS_LIST_LENGTH = 3;
 export const REVIEWS_LIST_LENGTH = 10;
 export const LAYER_OPTION = {
   url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
