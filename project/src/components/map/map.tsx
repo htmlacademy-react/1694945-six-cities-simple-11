@@ -37,7 +37,7 @@ const activeMarkerIcon = createMarkerIcon(
   IconDimension.AnchorWidth
 );
 function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Element {
-  const { lat, lng, zoom } = location;
+  const { latitude, longitude, zoom } = location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
   useEffect(() => {
@@ -45,8 +45,8 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
       const markerGroup = leaflet.layerGroup().addTo(map);
       map.setView(
         {
-          lat,
-          lng
+          lat: latitude,
+          lng: longitude
         },
         zoom
       );
@@ -54,8 +54,8 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
         leaflet
           .marker(
             {
-              lat: offer.location.lat,
-              lng: offer.location.lng
+              lat: offer.location.latitude,
+              lng: offer.location.longitude
             },
             {
               icon: (selectedOffer !== null && offer.id === selectedOffer)
@@ -69,7 +69,7 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
         markerGroup.clearLayers();
       };
     }
-  }, [map, lat, lng, zoom, offers, selectedOffer]);
+  }, [map, latitude, longitude, zoom, offers, selectedOffer]);
 
   return (
     <section
