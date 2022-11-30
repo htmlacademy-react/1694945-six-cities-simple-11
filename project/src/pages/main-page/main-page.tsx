@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import getSortedOffers from '../../store/selectors';
 import { CITIES } from '../../const';
-import { orderOffersByType, getOffersByCity } from '../../utils';
 import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
@@ -12,16 +12,8 @@ type MainPageProps = {
 };
 
 function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
+  const offers = useAppSelector(getSortedOffers);
   const activeCity = useAppSelector((state) => state.activeCity);
-  const allOffers = useAppSelector((state) => state.offers);
-  const activeSort = useAppSelector((state) => state.activeSort);
-  const offers = orderOffersByType(
-    getOffersByCity(
-      allOffers,
-      activeCity.name
-    ),
-    activeSort
-  );
   const mainClassName =
     offers.length > 0
       ? 'page page--gray page--main'
