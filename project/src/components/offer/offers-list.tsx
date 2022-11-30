@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Offer } from '../../types/offer';
 import { City } from '../../types/city';
 import { SORT_TYPES } from '../../const';
@@ -22,6 +23,7 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
       onMouseOut={() => setActiveCard(0)}
     />
   ));
+  const activeSort = useAppSelector((state) => state.activeSort);
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
@@ -31,6 +33,7 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
         </b>
         <OffersSort
           sortTypes={SORT_TYPES}
+          activeSort={activeSort}
         />
         <div className="cities__places-list places__list tabs__content">
           {cards}
