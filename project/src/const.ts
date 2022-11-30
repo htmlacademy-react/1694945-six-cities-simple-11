@@ -126,3 +126,4 @@ export const LAYER_OPTION = {
 };
 export const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 export const REQUEST_TIMEOUT = 5000;
+export const AUTHORIZATION_TOKEN_KEY_NAME = 'six-cities-simple-token';
