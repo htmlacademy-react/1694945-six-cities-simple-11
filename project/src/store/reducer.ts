@@ -10,15 +10,14 @@ import {
   ACTIVE_CITY,
   ACTIVE_SORT
 } from '../const';
-import { OFFERS } from '../mocks/offers';
-import { REVIEWS } from '../mocks/reviews';
+import { InitialState } from '../types/initial-state';
 
-const initialState = {
+const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT,
-  offers: OFFERS,
-  reviews: REVIEWS,
+  offers: [],
+  reviews: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
