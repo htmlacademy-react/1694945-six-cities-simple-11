@@ -28,7 +28,10 @@ function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
       <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Cities cities={CITIES} />
+          <Cities
+            cities={CITIES}
+            activeCity={activeCity}
+          />
         </div>
         <div className="cities">
           <OffersSection
