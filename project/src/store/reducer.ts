@@ -1,10 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  requireAuthorization,
   changeCity,
-  setActiveSort,
-  loadOffers
+  loadOffers,
+  setActiveSort
 } from './actions';
 import {
+  AuthorizationStatus,
   ACTIVE_CITY,
   ACTIVE_SORT
 } from '../const';
@@ -12,6 +14,7 @@ import { OFFERS } from '../mocks/offers';
 import { REVIEWS } from '../mocks/reviews';
 
 const initialState = {
+  authorizationStatus: AuthorizationStatus.Unknown,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT,
   offers: OFFERS,
@@ -19,6 +22,9 @@ const initialState = {
 };
 
 const reducer = createReducer(initialState, (builder) => {
+  builder.addCase(requireAuthorization, (state, action) => {
+    state.authorizationStatus = action.payload;
+  });
   builder.addCase(changeCity, (state, action) => {
     state.activeCity = action.payload;
   });
