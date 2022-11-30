@@ -9,4 +9,5 @@ export type InitialState = {
   activeSort: string;
   offers: Offer[];
   reviews: Review[];
+  error: string | null;
 }

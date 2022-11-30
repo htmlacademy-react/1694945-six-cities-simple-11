@@ -19,3 +19,7 @@ export const setActiveSort = createAction(
   'sort/setActiveSort',
   (sort: string) => ({ payload: sort })
 );
+export const checkError = createAction(
+  'data/checkError',
+  (error: string | null) => ({payload: error})
+);

@@ -3,13 +3,10 @@ import {
   requireAuthorization,
   changeCity,
   loadOffers,
-  setActiveSort
+  setActiveSort,
+  checkError,
 } from './actions';
-import {
-  AuthorizationStatus,
-  ACTIVE_CITY,
-  ACTIVE_SORT
-} from '../const';
+import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { InitialState } from '../types/initial-state';
 
 const initialState: InitialState = {
@@ -18,6 +15,7 @@ const initialState: InitialState = {
   activeSort: ACTIVE_SORT,
   offers: [],
   reviews: [],
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -32,6 +30,9 @@ const reducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(setActiveSort, (state, action) => {
     state.activeSort = action.payload;
+  });
+  builder.addCase(checkError, (state, action) => {
+    state.error = action.payload;
   });
 });
 
