@@ -1,17 +1,16 @@
 import { City } from '../../types/city';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { changeCity } from '../../store/actions';
 
 type CitiesProps = {
   cities: City[];
+  activeCity: City;
 };
 
-function Cities({ cities }: CitiesProps): JSX.Element {
+function Cities({ cities, activeCity }: CitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.activeCity);
   const citiesListItems = cities.map((city) => {
-    const isActiveCity = city.name === currentCity.name;
+    const isActiveCity = city.name === activeCity.name;
     return (
       <li key={city.name} className="locations__item">
         <a
