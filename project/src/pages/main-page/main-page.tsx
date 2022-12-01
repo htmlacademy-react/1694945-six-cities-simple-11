@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { store } from '../../store/store';
-import { fetchOffersAction } from '../../store/api-actions';
+import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getSortedOffers } from '../../store/selectors';
 import { CITIES } from '../../const';
@@ -18,6 +18,7 @@ type MainPageProps = {
 function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   useEffect(() => {
+    store.dispatch(checkAuthAction());
     store.dispatch(fetchOffersAction());
   }, []);
   const offers = useAppSelector(getSortedOffers);
