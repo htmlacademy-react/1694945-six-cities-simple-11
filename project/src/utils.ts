@@ -11,6 +11,9 @@ export const formatDate = (date: string, locales = FormatDate.Locale): string =>
     year: FormatDate.Year,
   });
 
+export const capitalizeString = (string: string): string =>
+  `${string[0].toUpperCase()}${string.slice(1,string.length)}`;
+
 export const getOffersByCity = (offers: Offer[], city: string): Offer[] =>
   offers.filter((offer) => offer.city.name === city);
 
