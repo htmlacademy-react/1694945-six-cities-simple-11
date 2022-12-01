@@ -1,26 +1,16 @@
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { store } from '../../store/store';
-import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getSortedOffers } from '../../store/selectors';
 import { CITIES } from '../../const';
 import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
+import Nav from '../../components/nav/nav';
 import Cities from '../../components/cities/cities';
 import Loader from '../../components/loader/loader';
 import OffersSection from '../../components/offer/offers-section';
 
-type MainPageProps = {
-  isAuthorized: boolean;
-};
-
-function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  useEffect(() => {
-    store.dispatch(checkAuthAction());
-    store.dispatch(fetchOffersAction());
-  }, []);
   const offers = useAppSelector(getSortedOffers);
   const activeCity = useAppSelector((state) => state.activeCity);
   const mainClassName =
@@ -33,7 +23,9 @@ function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
         <title>Main Page</title>
       </Helmet>
       {offers.length > 0 && <HeaderSvg />}
-      <Header isAuthorized={isAuthorized} />
+      <Header>
+        <Nav />
+      </Header>
       <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

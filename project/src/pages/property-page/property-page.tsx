@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { OTHER_OFFERS_LIST_LENGTH } from '../../const';
+import { AuthorizationStatus, OTHER_OFFERS_LIST_LENGTH } from '../../const';
 import { getSortedReviews } from '../../utils';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
@@ -17,11 +17,8 @@ import PropertyHost from '../../components/property/property-host';
 import OffersOther from '../../components/offer/offers-other';
 import Map from '../../components/map/map';
 
-type PropertyPageProps = {
-  isAuthorized: boolean;
-};
-
-function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
+function PropertyPage(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const { id } = useParams();
   const reviews = useAppSelector((state) => state.reviews);
   const offers = useAppSelector((state) => state.offers);
@@ -76,7 +73,7 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
       <Helmet>
         <title>Selected Offer</title>
       </Helmet>
-      <Header isAuthorized={isAuthorized} />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <PropertyGallery gallery={imagesList} />
@@ -97,9 +94,12 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
                 description={description}
               />
               {
-                (filteredReviews.length > 0 || isAuthorized) &&
+                (filteredReviews.length > 0
+                  ||
+                  authorizationStatus === AuthorizationStatus.Auth
+                ) &&
                 <PropertyReviews
-                  isAuthorized={isAuthorized}
+                  authorizationStatus={authorizationStatus}
                   reviews={filteredReviews}
                 />
               }

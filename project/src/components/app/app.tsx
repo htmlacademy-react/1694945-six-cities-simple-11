@@ -1,30 +1,29 @@
+import { useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import PrivateRoute from '../private-route/private-route';
+import { AppRoute } from '../../const';
+import { checkAuthorizeAction, fetchOffersAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
-const IS_AUTHORIZED = true;
-
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuthorizeAction());
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
-              >
-                <MainPage
-                  isAuthorized={IS_AUTHORIZED}
-                />
-              </PrivateRoute>
-            }
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}
@@ -32,15 +31,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
-              >
-                <PropertyPage
-                  isAuthorized={IS_AUTHORIZED}
-                />
-              </PrivateRoute>
-            }
+            element={<PropertyPage />}
           />
           <Route
             path={AppRoute.NotFound}

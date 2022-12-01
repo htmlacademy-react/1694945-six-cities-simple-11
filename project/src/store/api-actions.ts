@@ -4,8 +4,9 @@ import { AppDispatch, State } from '../types/state.js';
 import { Offer } from '../types/offer';
 import { store } from './store';
 import {
-  loadOffers,
   requireAuthorization,
+  loadUserData,
+  loadOffers,
   setError,
   setOffersDataLoadingStatus,
 } from './actions';
@@ -29,7 +30,7 @@ export const fetchOffersAction = createAsyncThunk<
   dispatch(loadOffers(data));
 });
 
-export const checkAuthAction = createAsyncThunk<
+export const checkAuthorizeAction = createAsyncThunk<
   void,
   undefined,
   {
@@ -39,8 +40,9 @@ export const checkAuthAction = createAsyncThunk<
   }
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
   try {
-    await api.get(APIRoute.Login);
+    const {data} = await api.get<UserData>(APIRoute.Login);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(loadUserData(data));
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
@@ -57,10 +59,9 @@ export const loginAction = createAsyncThunk<
 >(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const {
-      data: { token },
-    } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
+    dispatch(loadUserData(data));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   }
 );

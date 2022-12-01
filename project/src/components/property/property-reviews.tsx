@@ -1,13 +1,14 @@
+import { AuthorizationStatus } from '../../const';
 import { Review } from '../../types/review';
 import { calculateRatingWidth, formatDate } from '../../utils';
 import ReviewForm from './review/review-form';
 
 type PropertyReviewsProps = {
-  isAuthorized: boolean;
+  authorizationStatus: AuthorizationStatus;
   reviews: Review[];
 };
 
-function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsProps): JSX.Element {
+function PropertyReviews({ authorizationStatus, reviews }: PropertyReviewsProps): JSX.Element {
   return (
     <section className="property__reviews reviews">
       {reviews.length > 0 &&
@@ -49,7 +50,7 @@ function PropertyReviews({ isAuthorized, reviews }: PropertyReviewsProps): JSX.E
             ))}
           </ul>
         </>}
-      {isAuthorized && <ReviewForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
     </section>
   );
 }
