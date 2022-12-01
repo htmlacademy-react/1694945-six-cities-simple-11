@@ -5,7 +5,6 @@ import {
   changeCity,
   loadOffers,
   setActiveSort,
-  setError,
   setOffersDataLoadingStatus
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
@@ -22,7 +21,6 @@ const initialState: InitialState = {
   activeSort: ACTIVE_SORT,
   offers: [] as Offer[],
   reviews: [] as Review[],
-  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -40,9 +38,6 @@ const reducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(setActiveSort, (state, action) => {
     state.activeSort = action.payload;
-  });
-  builder.addCase(setError, (state, action) => {
-    state.error = action.payload;
   });
   builder.addCase(setOffersDataLoadingStatus, (state, action) => {
     state.isOffersDataLoading = action.payload;

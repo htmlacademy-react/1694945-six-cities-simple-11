@@ -23,17 +23,15 @@ export const changeCity = createAction(
   'city/changeCity',
   (city: City) => ({ payload: city })
 );
+
 export const loadOffers = createAction(
   'offers/loadOffers',
   (offers: Offer[]) => ({payload: offers})
 );
+
 export const setActiveSort = createAction(
   'sort/setActiveSort',
   (sort: string) => ({ payload: sort })
-);
-export const setError = createAction(
-  'data/setError',
-  (error: string | null) => ({payload: error})
 );
 
 export const setOffersDataLoadingStatus = createAction(
