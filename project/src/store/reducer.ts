@@ -4,13 +4,14 @@ import {
   changeCity,
   loadOffers,
   setActiveSort,
-  checkError,
+  setError,
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { InitialState } from '../types/initial-state';
 
 const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT,
   offers: [],
@@ -31,7 +32,7 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(setActiveSort, (state, action) => {
     state.activeSort = action.payload;
   });
-  builder.addCase(checkError, (state, action) => {
+  builder.addCase(setError, (state, action) => {
     state.error = action.payload;
   });
 });

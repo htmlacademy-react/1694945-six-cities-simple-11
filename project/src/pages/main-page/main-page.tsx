@@ -16,6 +16,7 @@ type MainPageProps = {
 };
 
 function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   useEffect(() => {
     store.dispatch(fetchOffersAction());
   }, []);
@@ -42,7 +43,7 @@ function MainPage({ isAuthorized }: MainPageProps): JSX.Element {
         </div>
         <div className="cities">
           {
-            offers.length === 0
+            isOffersDataLoading
               ? <Loader />
               :
               <OffersSection

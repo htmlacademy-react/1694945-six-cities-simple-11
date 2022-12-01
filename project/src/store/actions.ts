@@ -19,7 +19,13 @@ export const setActiveSort = createAction(
   'sort/setActiveSort',
   (sort: string) => ({ payload: sort })
 );
-export const checkError = createAction(
-  'data/checkError',
+export const setError = createAction(
+  'data/setError',
   (error: string | null) => ({payload: error})
 );
+
+export const setOffersDataLoadingStatus = createAction(
+  'data/setOffersDataLoadingStatus',
+  (status: boolean) => ({payload: status})
+);
+

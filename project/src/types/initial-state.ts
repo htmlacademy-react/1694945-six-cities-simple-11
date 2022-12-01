@@ -5,6 +5,7 @@ import { Review } from '../types/review';
 
 export type InitialState = {
   authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
   activeCity: City;
   activeSort: string;
   offers: Offer[];
