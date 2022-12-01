@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { OTHER_OFFERS_LIST_LENGTH } from '../../const';
+import { AuthorizationStatus, OTHER_OFFERS_LIST_LENGTH } from '../../const';
+import { getSortedReviews } from '../../utils';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
 import PropertyGallery from '../../components/property/property-gallery';
@@ -16,12 +17,10 @@ import PropertyHost from '../../components/property/property-host';
 import OffersOther from '../../components/offer/offers-other';
 import Map from '../../components/map/map';
 
-type PropertyPageProps = {
-  isAuthorized: boolean;
-};
-
-function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
+function PropertyPage(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const { id } = useParams();
+  const reviews = useAppSelector((state) => state.reviews);
   const offers = useAppSelector((state) => state.offers);
   const foundOffer = offers.find((offer) => offer.id === Number(id));
   if (foundOffer === undefined) {
@@ -43,16 +42,29 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
   } = foundOffer;
   const imagesList = images
     .map((image, index) => (
-      <div key={image} className="property__image-wrapper">
-        <img className="property__image" src={image} alt={`IMG_${index}`} />
+      <div
+        key={image}
+        className="property__image-wrapper"
+      >
+        <img
+          className="property__image"
+          src={image}
+          alt={`IMG_${index}`}
+        />
       </div>
     ));
   const goodsList = goods
     .map((good) => (
-      <li key={good} className="property__inside-item">
+      <li
+        key={good}
+        className="property__inside-item"
+      >
         {good}
       </li>
     ));
+  const filteredReviews = getSortedReviews(reviews.filter(
+    (review) => review.hotelId === Number(id)
+  ));
   const otherOffers = offers.filter(
     (offer) => offer.id !== Number(id) && offer.city.name === foundOffer.city.name
   ).slice(0, OTHER_OFFERS_LIST_LENGTH);
@@ -61,7 +73,7 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
       <Helmet>
         <title>Selected Offer</title>
       </Helmet>
-      <Header isAuthorized={isAuthorized} />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <PropertyGallery gallery={imagesList} />
@@ -70,14 +82,25 @@ function PropertyPage({ isAuthorized }: PropertyPageProps): JSX.Element {
               {isPremium && <PropertyPremiumMark />}
               <PropertyTitle title={title} />
               <PropertyRating rating={rating} />
-              <PropertyFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults} />
+              <PropertyFeatures
+                type={type}
+                bedrooms={bedrooms}
+                maxAdults={maxAdults}
+              />
               <PropertyPrice price={price} />
               <PropertyGoods goods={goodsList} />
-              <PropertyHost host={host} description={description} />
+              <PropertyHost
+                host={host}
+                description={description}
+              />
               {
+                (filteredReviews.length > 0
+                  ||
+                  authorizationStatus === AuthorizationStatus.Auth
+                ) &&
                 <PropertyReviews
-                  isAuthorized={isAuthorized}
-                  offerId={Number(id)}
+                  authorizationStatus={authorizationStatus}
+                  reviews={filteredReviews}
                 />
               }
             </div>
