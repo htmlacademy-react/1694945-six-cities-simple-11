@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import HistoryRouter from '../history-router/history-router';
+import { Routes, Route } from 'react-router-dom';
+import { browserHistory } from '../../browser-history';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../const';
 import { checkAuthorizeAction, fetchOffersAction } from '../../store/api-actions';
@@ -19,7 +21,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -38,7 +40,7 @@ function App(): JSX.Element {
             element={<NotFoundPage />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
