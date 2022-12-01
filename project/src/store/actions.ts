@@ -2,7 +2,12 @@ import { createAction } from '@reduxjs/toolkit';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
 import { UserData } from '../types/user-data';
-import {AuthorizationStatus} from '../const';
+import { AppRoute, AuthorizationStatus } from '../const';
+
+export const redirectToRoute = createAction(
+  'app/redirectToRoute',
+  (route: AppRoute) => ({payload: route})
+);
 
 export const requireAuthorization = createAction(
   'user/requireAuthorization',

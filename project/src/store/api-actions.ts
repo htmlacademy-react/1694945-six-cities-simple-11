@@ -9,9 +9,15 @@ import {
   loadOffers,
   setError,
   setOffersDataLoadingStatus,
+  redirectToRoute,
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import {
+  APIRoute,
+  AppRoute,
+  AuthorizationStatus,
+  TIMEOUT_SHOW_ERROR,
+} from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
@@ -40,7 +46,7 @@ export const checkAuthorizeAction = createAsyncThunk<
   }
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
   try {
-    const {data} = await api.get<UserData>(APIRoute.Login);
+    const { data } = await api.get<UserData>(APIRoute.Login);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(loadUserData(data));
   } catch {
@@ -59,10 +65,14 @@ export const loginAction = createAsyncThunk<
 >(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    const { data } = await api.post<UserData>(APIRoute.Login, {
+      email,
+      password,
+    });
     saveToken(data.token);
     dispatch(loadUserData(data));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   }
 );
 
