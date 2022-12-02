@@ -6,7 +6,8 @@ import {
   loadOffers,
   loadOtherOffers,
   setActiveSort,
-  setDataLoadingStatus
+  setDataLoadingStatus,
+  loadSelectedOffer
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { UserData } from '../types/user-data';
@@ -21,6 +22,7 @@ const initialState: InitialState = {
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT,
   offers: [] as Offer[],
+  selectedOffer: null,
   otherOffers: null,
   reviews: [] as Review[]
 };
@@ -37,6 +39,9 @@ const reducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(loadOffers, (state, action) => {
     state.offers = action.payload;
+  });
+  builder.addCase(loadSelectedOffer, (state, action) => {
+    state.selectedOffer = action.payload;
   });
   builder.addCase(loadOtherOffers, (state, action) => {
     state.otherOffers = action.payload;

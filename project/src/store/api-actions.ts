@@ -9,6 +9,7 @@ import {
   loadOtherOffers,
   setDataLoadingStatus,
   redirectToRoute,
+  loadSelectedOffer,
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
@@ -29,6 +30,25 @@ export const fetchOffersAction = createAsyncThunk<
   dispatch(setDataLoadingStatus(false));
   dispatch(loadOffers(data));
 });
+
+export const fetchSelectedOfferAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/loadSelectedOffer',
+  async (offerId, {dispatch, extra: api}) => {
+    dispatch(setDataLoadingStatus(true));
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(loadSelectedOffer(data));
+      dispatch(setDataLoadingStatus(false));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      dispatch(setDataLoadingStatus(false));
+    }
+  }
+);
 
 export const fetchOtherOffersAction = createAsyncThunk<
   void,

@@ -11,6 +11,7 @@ export type InitialState = {
   activeCity: City;
   activeSort: string;
   offers: Offer[];
+  selectedOffer: Offer | null;
   otherOffers: Offer[] | null;
   reviews: Review[];
 }

@@ -134,3 +134,4 @@ export const REQUEST_TIMEOUT = 5000;
 export const AUTHORIZATION_TOKEN_KEY_NAME = 'six-cities-simple-token';
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const LOGIN_FIELDS = Object.freeze(['email', 'password']);
+export const MIN_PHOTO_NUMBER = 1;

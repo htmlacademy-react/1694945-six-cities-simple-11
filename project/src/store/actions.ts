@@ -29,6 +29,11 @@ export const loadOffers = createAction(
   (offers: Offer[]) => ({payload: offers})
 );
 
+export const loadSelectedOffer = createAction(
+  'data/loadSelectedOffer',
+  (selectedOffer: Offer) => ({payload: selectedOffer})
+);
+
 export const loadOtherOffers = createAction(
   'data/loadOtherOffers',
   (otherOffers: Offer[]) => ({payload: otherOffers})
