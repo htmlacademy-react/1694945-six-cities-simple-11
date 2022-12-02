@@ -7,9 +7,10 @@ import { Review } from '../types/review';
 export type InitialState = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData;
-  isOffersDataLoading: boolean;
+  isDataLoading: boolean;
   activeCity: City;
   activeSort: string;
   offers: Offer[];
+  otherOffers: Offer[] | null;
   reviews: Review[];
 }

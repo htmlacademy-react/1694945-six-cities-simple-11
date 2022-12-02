@@ -4,8 +4,9 @@ import {
   loadUserData,
   changeCity,
   loadOffers,
+  loadOtherOffers,
   setActiveSort,
-  setOffersDataLoadingStatus
+  setDataLoadingStatus
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { UserData } from '../types/user-data';
@@ -16,11 +17,12 @@ import { InitialState } from '../types/initial-state';
 const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {} as UserData,
-  isOffersDataLoading: false,
+  isDataLoading: false,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT,
   offers: [] as Offer[],
-  reviews: [] as Review[],
+  otherOffers: null,
+  reviews: [] as Review[]
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,11 +38,14 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadOffers, (state, action) => {
     state.offers = action.payload;
   });
+  builder.addCase(loadOtherOffers, (state, action) => {
+    state.otherOffers = action.payload;
+  });
   builder.addCase(setActiveSort, (state, action) => {
     state.activeSort = action.payload;
   });
-  builder.addCase(setOffersDataLoadingStatus, (state, action) => {
-    state.isOffersDataLoading = action.payload;
+  builder.addCase(setDataLoadingStatus, (state, action) => {
+    state.isDataLoading = action.payload;
   });
 });
 

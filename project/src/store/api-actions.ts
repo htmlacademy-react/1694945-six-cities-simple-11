@@ -6,7 +6,8 @@ import {
   requireAuthorization,
   loadUserData,
   loadOffers,
-  setOffersDataLoadingStatus,
+  loadOtherOffers,
+  setDataLoadingStatus,
   redirectToRoute,
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
@@ -23,10 +24,25 @@ export const fetchOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setOffersDataLoadingStatus(true));
+  dispatch(setDataLoadingStatus(true));
   const { data } = await api.get<Offer[]>(APIRoute.Offers);
-  dispatch(setOffersDataLoadingStatus(false));
+  dispatch(setDataLoadingStatus(false));
   dispatch(loadOffers(data));
+});
+
+export const fetchOtherOffersAction = createAsyncThunk<
+  void,
+  number,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchOtherOffers', async (offerId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer[]>(
+    `${APIRoute.Offers}/${offerId}/nearby`
+  );
+  dispatch(loadOtherOffers(data));
 });
 
 export const checkAuthorizeAction = createAsyncThunk<

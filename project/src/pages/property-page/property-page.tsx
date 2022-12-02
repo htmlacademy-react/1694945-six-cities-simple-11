@@ -1,7 +1,10 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { AuthorizationStatus, OTHER_OFFERS_LIST_LENGTH } from '../../const';
+import { store } from '../../store/store';
+import { fetchOtherOffersAction } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../const';
 import { getSortedReviews } from '../../utils';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Header from '../../components/header/header';
@@ -17,13 +20,25 @@ import PropertyHost from '../../components/property/property-host';
 import OffersOther from '../../components/offer/offers-other';
 import Map from '../../components/map/map';
 
+
 function PropertyPage(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus
+  );
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   const { id } = useParams();
+  const offerId = Number(id);
+
+  useEffect(() => {
+    store.dispatch(fetchOtherOffersAction(offerId));
+  }, [offerId]);
+
   const reviews = useAppSelector((state) => state.reviews);
   const offers = useAppSelector((state) => state.offers);
-  const foundOffer = offers.find((offer) => offer.id === Number(id));
-  if (foundOffer === undefined) {
+  const otherOffers = useAppSelector((state) => state.otherOffers);
+  const areOtherOffersAvailable = otherOffers && otherOffers.length > 0;
+  const offerItem = offers.find((offer) => offer.id === offerId);
+  if (offerItem === undefined) {
     return <NotFoundPage />;
   }
   const {
@@ -38,40 +53,26 @@ function PropertyPage(): JSX.Element {
     goods,
     description,
     host,
-    location
-  } = foundOffer;
-  const imagesList = images
-    .map((image, index) => (
-      <div
-        key={image}
-        className="property__image-wrapper"
-      >
-        <img
-          className="property__image"
-          src={image}
-          alt={`IMG_${index}`}
-        />
-      </div>
-    ));
-  const goodsList = goods
-    .map((good) => (
-      <li
-        key={good}
-        className="property__inside-item"
-      >
-        {good}
-      </li>
-    ));
-  const filteredReviews = getSortedReviews(reviews.filter(
-    (review) => review.hotelId === Number(id)
+    location,
+  } = offerItem;
+  const imagesList = images.map((image, index) => (
+    <div key={image} className="property__image-wrapper">
+      <img className="property__image" src={image} alt={`IMG_${index}`} />
+    </div>
   ));
-  const otherOffers = offers.filter(
-    (offer) => offer.id !== Number(id) && offer.city.name === foundOffer.city.name
-  ).slice(0, OTHER_OFFERS_LIST_LENGTH);
+  const goodsList = goods.map((good) => (
+    <li key={good} className="property__inside-item">
+      {good}
+    </li>
+  ));
+  const filteredReviews = getSortedReviews(
+    reviews.filter((review) => review.hotelId === Number(id))
+  );
+
   return (
     <div className="page">
       <Helmet>
-        <title>Selected Offer</title>
+        <title>{`${offerItem.city.name} — ${offerItem.title}`}</title>
       </Helmet>
       <Header />
       <main className="page__main page__main--property">
@@ -89,38 +90,29 @@ function PropertyPage(): JSX.Element {
               />
               <PropertyPrice price={price} />
               <PropertyGoods goods={goodsList} />
-              <PropertyHost
-                host={host}
-                description={description}
-              />
-              {
-                (filteredReviews.length > 0
-                  ||
-                  authorizationStatus === AuthorizationStatus.Auth
-                ) &&
+              <PropertyHost host={host} description={description} />
+              {(filteredReviews.length > 0 || isAuthorized) && (
                 <PropertyReviews
                   authorizationStatus={authorizationStatus}
                   reviews={filteredReviews}
                 />
-              }
+              )}
             </div>
           </div>
-          {
-            otherOffers.length > 0 &&
+          {areOtherOffersAvailable && (
             <Map
               className={'property__map map'}
               location={location}
-              offers={[...otherOffers, foundOffer]}
-              selectedOffer={Number(id)}
+              offers={[...otherOffers, offerItem]}
+              selectedOffer={offerId}
             />
-          }
+          )}
         </section>
-        {
-          otherOffers.length > 0 &&
+        {areOtherOffersAvailable && (
           <div className="container">
             <OffersOther offers={otherOffers} />
           </div>
-        }
+        )}
       </main>
     </div>
   );

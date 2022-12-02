@@ -20,22 +20,27 @@ export const loadUserData = createAction(
 );
 
 export const changeCity = createAction(
-  'city/changeCity',
+  'data/changeCity',
   (city: City) => ({ payload: city })
 );
 
 export const loadOffers = createAction(
-  'offers/loadOffers',
+  'data/loadOffers',
   (offers: Offer[]) => ({payload: offers})
 );
 
+export const loadOtherOffers = createAction(
+  'data/loadOtherOffers',
+  (otherOffers: Offer[]) => ({payload: otherOffers})
+);
+
 export const setActiveSort = createAction(
-  'sort/setActiveSort',
+  'data/setActiveSort',
   (sort: string) => ({ payload: sort })
 );
 
-export const setOffersDataLoadingStatus = createAction(
-  'data/setOffersDataLoadingStatus',
+export const setDataLoadingStatus = createAction(
+  'data/setDataLoadingStatus',
   (status: boolean) => ({payload: status})
 );
 
