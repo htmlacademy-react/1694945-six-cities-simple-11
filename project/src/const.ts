@@ -7,6 +7,7 @@ export enum AppRoute {
 }
 export enum APIRoute {
   Offers = '/hotels',
+  Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
@@ -32,6 +33,10 @@ export enum FormatDate {
   Locale = 'en-US',
   Month = 'long',
   Year = 'numeric',
+}
+export enum Photo {
+  MinNumber = 1,
+  MaxNumberInGallery = 6,
 }
 export enum Rating {
   Max = 5,
@@ -134,4 +139,3 @@ export const REQUEST_TIMEOUT = 5000;
 export const AUTHORIZATION_TOKEN_KEY_NAME = 'six-cities-simple-token';
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const LOGIN_FIELDS = Object.freeze(['email', 'password']);
-export const MIN_PHOTO_NUMBER = 1;
