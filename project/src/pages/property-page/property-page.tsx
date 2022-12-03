@@ -121,6 +121,7 @@ function PropertyPage(): JSX.Element {
                 <PropertyReviews
                   authorizationStatus={authorizationStatus}
                   reviews={getSortedReviews(reviews)}
+                  selectedOffer={offerId}
                 />
               )}
             </div>

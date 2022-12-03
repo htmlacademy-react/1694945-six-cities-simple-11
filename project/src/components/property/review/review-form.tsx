@@ -1,7 +1,16 @@
-import { Fragment, ChangeEvent, useState } from 'react';
-import { MARKS } from '../../../const';
+import { Fragment, useState, ChangeEvent } from 'react';
+import { OfferId } from '../../../types/offer';
+import {
+  MARKS,
+  TextAreaProperites
+} from '../../../const';
 import { getPluralWord } from '../../../utils';
-function ReviewForm(): JSX.Element {
+
+type ReviewFormProps = {
+  selectedOffer: OfferId;
+};
+
+function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState({
     rating: '',
     review: ''
@@ -10,6 +19,7 @@ function ReviewForm(): JSX.Element {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const marksList = MARKS.map((mark) => (
     <Fragment key={mark.key}>
       <input
@@ -47,6 +57,8 @@ function ReviewForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={''}
         onChange={handleFieldChange}
+        minLength={TextAreaProperites.MinLength}
+        maxLength={TextAreaProperites.MaxLength}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
