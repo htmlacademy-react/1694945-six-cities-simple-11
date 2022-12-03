@@ -1,7 +1,6 @@
 import { User } from './user';
 export type Review = {
   id: number;
-  hotelId: number;
   user: User;
   rating: number;
   comment: string;
