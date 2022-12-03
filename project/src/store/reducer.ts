@@ -2,17 +2,17 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   requireAuthorization,
   loadUserData,
+  setDataLoadingStatus,
   changeCity,
+  setActiveSort,
   loadOffers,
   loadOtherOffers,
-  setActiveSort,
-  setDataLoadingStatus,
-  loadSelectedOffer
+  loadSelectedOffer,
+  loadReviews
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { UserData } from '../types/user-data';
 import { Offer } from '../types/offer';
-import { Review } from '../types/review';
 import { InitialState } from '../types/initial-state';
 
 const initialState: InitialState = {
@@ -24,7 +24,7 @@ const initialState: InitialState = {
   offers: [] as Offer[],
   selectedOffer: null,
   otherOffers: null,
-  reviews: [] as Review[]
+  reviews: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -34,8 +34,14 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadUserData, (state, action) => {
     state.userData = action.payload;
   });
+  builder.addCase(setDataLoadingStatus, (state, action) => {
+    state.isDataLoading = action.payload;
+  });
   builder.addCase(changeCity, (state, action) => {
     state.activeCity = action.payload;
+  });
+  builder.addCase(setActiveSort, (state, action) => {
+    state.activeSort = action.payload;
   });
   builder.addCase(loadOffers, (state, action) => {
     state.offers = action.payload;
@@ -46,11 +52,8 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadOtherOffers, (state, action) => {
     state.otherOffers = action.payload;
   });
-  builder.addCase(setActiveSort, (state, action) => {
-    state.activeSort = action.payload;
-  });
-  builder.addCase(setDataLoadingStatus, (state, action) => {
-    state.isDataLoading = action.payload;
+  builder.addCase(loadReviews, (state, action) => {
+    state.reviews = action.payload;
   });
 });
 

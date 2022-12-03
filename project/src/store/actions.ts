@@ -1,7 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
+import { UserData } from '../types/user-data';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
-import { UserData } from '../types/user-data';
+import { Review } from '../types/review';
 import { AppRoute, AuthorizationStatus } from '../const';
 
 export const redirectToRoute = createAction(
@@ -37,6 +38,11 @@ export const loadSelectedOffer = createAction(
 export const loadOtherOffers = createAction(
   'data/loadOtherOffers',
   (otherOffers: Offer[]) => ({payload: otherOffers})
+);
+
+export const loadReviews = createAction(
+  'data/loadReviews',
+  (reviews: Review[]) => ({payload: reviews})
 );
 
 export const setActiveSort = createAction(

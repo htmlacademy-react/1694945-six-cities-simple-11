@@ -5,13 +5,13 @@ import ReviewForm from './review/review-form';
 
 type PropertyReviewsProps = {
   authorizationStatus: AuthorizationStatus;
-  reviews: Review[];
+  reviews: Review[] | null;
 };
 
 function PropertyReviews({ authorizationStatus, reviews }: PropertyReviewsProps): JSX.Element {
   return (
     <section className="property__reviews reviews">
-      {reviews.length > 0 &&
+      {reviews && reviews.length > 0 &&
         <>
           <h2 className="reviews__title">
             Reviews · <span className="reviews__amount">{reviews.length}</span>

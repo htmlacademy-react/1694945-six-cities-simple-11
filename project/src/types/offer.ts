@@ -1,8 +1,10 @@
 import {User} from './user';
 import {City} from './city';
 import {Location} from './location';
+
+export type OfferId = number;
 export type Offer = {
-  id: number;
+  id: OfferId;
   isPremium: boolean;
   title: string;
   type: string;

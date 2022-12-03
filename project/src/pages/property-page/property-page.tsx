@@ -6,8 +6,12 @@ import { store } from '../../store/store';
 import {
   fetchSelectedOfferAction,
   fetchOtherOffersAction,
+  fetchReviewsAction,
 } from '../../store/api-actions';
-import { AuthorizationStatus, MIN_PHOTO_NUMBER } from '../../const';
+import {
+  AuthorizationStatus,
+  Photo
+} from '../../const';
 import { getSortedReviews } from '../../utils';
 import Loader from '../../components/loader/loader';
 import Header from '../../components/header/header';
@@ -31,6 +35,7 @@ function PropertyPage(): JSX.Element {
   useEffect(() => {
     store.dispatch(fetchSelectedOfferAction(offerId));
     store.dispatch(fetchOtherOffersAction(offerId));
+    store.dispatch(fetchReviewsAction(offerId));
   }, [offerId]);
 
   const selectedOffer = useAppSelector((state) => state.selectedOffer);
@@ -66,7 +71,7 @@ function PropertyPage(): JSX.Element {
       <img
         className="property__image"
         src={image}
-        alt={`IMG_${index + MIN_PHOTO_NUMBER}`}
+        alt={`IMG_${index + Photo.MinNumber}`}
       />
     </div>
   ));
@@ -78,9 +83,7 @@ function PropertyPage(): JSX.Element {
       {good}
     </li>
   ));
-  const filteredReviews = getSortedReviews(
-    reviews.filter((review) => review.hotelId === Number(id))
-  );
+  const areReviewsAvailable = reviews && reviews.length > 0;
   return (
     <div className="page">
       <Helmet>
@@ -91,7 +94,10 @@ function PropertyPage(): JSX.Element {
       </Header>
       <main className="page__main page__main--property">
         <section className="property">
-          <PropertyGallery gallery={imagesListItems} />
+          {
+            imagesListItems.length > 0 &&
+            <PropertyGallery gallery={imagesListItems.slice(0, Photo.MaxNumberInGallery)} />
+          }
           <div className="property__container container">
             <div className="property__wrapper">
               {isPremium && <PropertyPremiumMark />}
@@ -103,15 +109,18 @@ function PropertyPage(): JSX.Element {
                 maxAdults={maxAdults}
               />
               <PropertyPrice price={price} />
-              <PropertyGoods goods={goodsListItems} />
+              {
+                goodsListItems.length > 0 &&
+                <PropertyGoods goods={goodsListItems} />
+              }
               <PropertyHost
                 host={host}
                 description={description}
               />
-              {(filteredReviews.length > 0 || isAuthorized) && (
+              {(areReviewsAvailable || isAuthorized) && (
                 <PropertyReviews
                   authorizationStatus={authorizationStatus}
-                  reviews={filteredReviews}
+                  reviews={getSortedReviews(reviews)}
                 />
               )}
             </div>

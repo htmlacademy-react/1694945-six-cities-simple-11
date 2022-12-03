@@ -13,5 +13,5 @@ export type InitialState = {
   offers: Offer[];
   selectedOffer: Offer | null;
   otherOffers: Offer[] | null;
-  reviews: Review[];
+  reviews: Review[] | null;
 }

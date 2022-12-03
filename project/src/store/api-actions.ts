@@ -1,69 +1,22 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { Offer } from '../types/offer';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { Offer, OfferId } from '../types/offer';
+import { Review } from '../types/review';
 import {
   requireAuthorization,
+  redirectToRoute,
   loadUserData,
+  setDataLoadingStatus,
   loadOffers,
   loadOtherOffers,
-  setDataLoadingStatus,
-  redirectToRoute,
   loadSelectedOffer,
+  loadReviews
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
-import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
-
-export const fetchOffersAction = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setDataLoadingStatus(true));
-  const { data } = await api.get<Offer[]>(APIRoute.Offers);
-  dispatch(setDataLoadingStatus(false));
-  dispatch(loadOffers(data));
-});
-
-export const fetchSelectedOfferAction = createAsyncThunk<void, number, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'data/loadSelectedOffer',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setDataLoadingStatus(true));
-    try {
-      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
-      dispatch(loadSelectedOffer(data));
-      dispatch(setDataLoadingStatus(false));
-    } catch {
-      dispatch(redirectToRoute(AppRoute.NotFound));
-      dispatch(setDataLoadingStatus(false));
-    }
-  }
-);
-
-export const fetchOtherOffersAction = createAsyncThunk<
-  void,
-  number,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('data/fetchOtherOffers', async (offerId, { dispatch, extra: api }) => {
-  const { data } = await api.get<Offer[]>(
-    `${APIRoute.Offers}/${offerId}/nearby`
-  );
-  dispatch(loadOtherOffers(data));
-});
 
 export const checkAuthorizeAction = createAsyncThunk<
   void,
@@ -118,3 +71,64 @@ export const logoutAction = createAsyncThunk<
   dropToken();
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
 });
+
+export const fetchOffersAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
+  dispatch(setDataLoadingStatus(true));
+  const { data } = await api.get<Offer[]>(APIRoute.Offers);
+  dispatch(setDataLoadingStatus(false));
+  dispatch(loadOffers(data));
+});
+
+export const fetchSelectedOfferAction = createAsyncThunk<void, OfferId, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/loadSelectedOffer',
+  async (offerId, {dispatch, extra: api}) => {
+    dispatch(setDataLoadingStatus(true));
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(loadSelectedOffer(data));
+      dispatch(setDataLoadingStatus(false));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      dispatch(setDataLoadingStatus(false));
+    }
+  }
+);
+
+export const fetchOtherOffersAction = createAsyncThunk<
+  void,
+  OfferId,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchOtherOffers', async (offerId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer[]>(
+    `${APIRoute.Offers}/${offerId}/nearby`
+  );
+  dispatch(loadOtherOffers(data));
+});
+
+export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviewsAction',
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
+    dispatch(loadReviews(data));
+  }
+);
