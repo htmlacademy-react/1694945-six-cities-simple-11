@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../types/state.js';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { Offer, OfferId } from '../types/offer';
-import { Review } from '../types/review';
+import { Review, ReviewData } from '../types/review';
 import {
   requireAuthorization,
   redirectToRoute,
@@ -13,7 +13,8 @@ import {
   loadOffers,
   loadOtherOffers,
   loadSelectedOffer,
-  loadReviews
+  loadReviews,
+  setReviewFormBlocked
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
@@ -130,5 +131,18 @@ export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
   async (offerId, {dispatch, extra: api}) => {
     const {data} = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
     dispatch(loadReviews(data));
+  }
+);
+
+export const sendReviewAction = createAsyncThunk<void, ReviewData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendReviewAction',
+  async ({id, rating, comment}, {dispatch, extra: api}) => {
+    await api.post(`${APIRoute.Reviews}/${id}`, {rating, comment});
+    dispatch(fetchReviewsAction(id));
+    dispatch(setReviewFormBlocked(false));
   }
 );

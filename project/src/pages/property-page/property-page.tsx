@@ -66,7 +66,7 @@ function PropertyPage(): JSX.Element {
     location,
     city,
   } = selectedOffer;
-  const imagesListItems = images.map((image, index) => (
+  const imagesList = images.map((image, index) => (
     <div key={image} className="property__image-wrapper">
       <img
         className="property__image"
@@ -75,7 +75,7 @@ function PropertyPage(): JSX.Element {
       />
     </div>
   ));
-  const goodsListItems = goods.map((good) => (
+  const goodsList = goods.map((good) => (
     <li
       key={good}
       className="property__inside-item"
@@ -95,8 +95,8 @@ function PropertyPage(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           {
-            imagesListItems.length > 0 &&
-            <PropertyGallery gallery={imagesListItems.slice(0, Photo.MaxNumberInGallery)} />
+            imagesList.length > 0 &&
+            <PropertyGallery gallery={imagesList.slice(0, Photo.MaxNumberInGallery)} />
           }
           <div className="property__container container">
             <div className="property__wrapper">
@@ -110,8 +110,8 @@ function PropertyPage(): JSX.Element {
               />
               <PropertyPrice price={price} />
               {
-                goodsListItems.length > 0 &&
-                <PropertyGoods goods={goodsListItems} />
+                goodsList.length > 0 &&
+                <PropertyGoods goods={goodsList} />
               }
               <PropertyHost
                 host={host}

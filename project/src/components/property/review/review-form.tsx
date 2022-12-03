@@ -2,6 +2,7 @@ import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { useAppSelector } from '../../../hooks/use-app-selector';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { setReviewFormBlocked } from '../../../store/actions';
+import { sendReviewAction } from '../../../store/api-actions';
 import { OfferId } from '../../../types/offer';
 import {
   MARKS,
@@ -17,7 +18,6 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isReviewFormBlocked = useAppSelector((state) => state.isReviewFormBlocked);
   const [formData, setFormData] = useState({
-    id: selectedOffer,
     rating: '',
     review: ''
   });
@@ -31,6 +31,17 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
     if (formData.rating && formData.review) {
       dispatch(setReviewFormBlocked(true));
     }
+    dispatch(sendReviewAction({
+      id: selectedOffer,
+      rating: +formData.rating,
+      comment: formData.review,
+    }));
+
+    setFormData({
+      rating: '',
+      review: ''
+    });
+
   };
 
   const isSubmitButtonDisabled = formData.review.length < TextAreaProperites.MinLength
@@ -41,12 +52,12 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
     ||
     isReviewFormBlocked;
 
-  const marksListItems = MARKS.map((mark) => (
+  const marksList = MARKS.map((mark) => (
     <Fragment key={mark.key}>
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={mark.key}
+        value={mark.key}
         id={`${mark.key}-${getPluralWord(mark.key, 'star')}`}
         type="radio"
         checked={Number(formData.rating) === mark.key}
@@ -77,24 +88,25 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {marksListItems}
+        {marksList}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
+        value={formData.review}
         onChange={handleFieldChange}
-        minLength={TextAreaProperites.MinLength}
-        maxLength={TextAreaProperites.MaxLength}
-      />
+      >
+      </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set
           <span className="reviews__star">rating</span> and describe your stay
           with at least&nbsp;
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">
+            {`${TextAreaProperites.MinLength} characters`}
+          </b>.
         </p>
         <button
           className="reviews__submit form__submit button"
