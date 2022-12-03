@@ -2,7 +2,7 @@ import { City } from './types/city';
 export enum AppRoute {
   Main = '/',
   Login = '/login',
-  Room = '/offer/:id',
+  Room = '/offer',
   NotFound = '*',
 }
 export enum APIRoute {

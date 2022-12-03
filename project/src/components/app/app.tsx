@@ -22,7 +22,7 @@ function App(): JSX.Element {
             element={<LoginPage />}
           />
           <Route
-            path={AppRoute.Room}
+            path={`${AppRoute.Room}/:id`}
             element={<PropertyPage />}
           />
           <Route
