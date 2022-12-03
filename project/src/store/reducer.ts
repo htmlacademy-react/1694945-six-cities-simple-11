@@ -8,7 +8,8 @@ import {
   loadOffers,
   loadOtherOffers,
   loadSelectedOffer,
-  loadReviews
+  loadReviews,
+  setReviewFormBlocked
 } from './actions';
 import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT } from '../const';
 import { UserData } from '../types/user-data';
@@ -25,6 +26,7 @@ const initialState: InitialState = {
   selectedOffer: null,
   otherOffers: null,
   reviews: null,
+  isReviewFormBlocked: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -54,6 +56,9 @@ const reducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(loadReviews, (state, action) => {
     state.reviews = action.payload;
+  });
+  builder.addCase(setReviewFormBlocked, (state, action) => {
+    state.isReviewFormBlocked = action.payload;
   });
 });
 

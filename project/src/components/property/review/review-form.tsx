@@ -1,4 +1,7 @@
-import { Fragment, useState, ChangeEvent } from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { useAppSelector } from '../../../hooks/use-app-selector';
+import { useAppDispatch } from '../../../hooks/use-app-dispatch';
+import { setReviewFormBlocked } from '../../../store/actions';
 import { OfferId } from '../../../types/offer';
 import {
   MARKS,
@@ -11,7 +14,10 @@ type ReviewFormProps = {
 };
 
 function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isReviewFormBlocked = useAppSelector((state) => state.isReviewFormBlocked);
   const [formData, setFormData] = useState({
+    id: selectedOffer,
     rating: '',
     review: ''
   });
@@ -20,7 +26,22 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
     setFormData({ ...formData, [name]: value });
   };
 
-  const marksList = MARKS.map((mark) => (
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (formData.rating && formData.review) {
+      dispatch(setReviewFormBlocked(true));
+    }
+  };
+
+  const isSubmitButtonDisabled = formData.review.length < TextAreaProperites.MinLength
+    ||
+    formData.review.length > TextAreaProperites.MaxLength
+    ||
+    formData.rating === ''
+    ||
+    isReviewFormBlocked;
+
+  const marksListItems = MARKS.map((mark) => (
     <Fragment key={mark.key}>
       <input
         className="form__rating-input visually-hidden"
@@ -43,12 +64,20 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
     </Fragment>
   ));
   return (
-    <form className="reviews__form form" action="#" method="post">
-      <label className="reviews__label form__label" htmlFor="review">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
+      <label
+        className="reviews__label form__label"
+        htmlFor="review"
+      >
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {marksList}
+        {marksListItems}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -70,9 +99,9 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={isSubmitButtonDisabled}
         >
-          Submit
+          {!isReviewFormBlocked ? 'Submit' : 'Sending...'}
         </button>
       </div>
     </form>

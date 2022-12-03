@@ -20,9 +20,19 @@ export const loadUserData = createAction(
   (userData: UserData) => ({payload: userData})
 );
 
+export const setDataLoadingStatus = createAction(
+  'data/setDataLoadingStatus',
+  (status: boolean) => ({payload: status})
+);
+
 export const changeCity = createAction(
   'data/changeCity',
   (city: City) => ({ payload: city })
+);
+
+export const setActiveSort = createAction(
+  'data/setActiveSort',
+  (sort: string) => ({ payload: sort })
 );
 
 export const loadOffers = createAction(
@@ -45,13 +55,7 @@ export const loadReviews = createAction(
   (reviews: Review[]) => ({payload: reviews})
 );
 
-export const setActiveSort = createAction(
-  'data/setActiveSort',
-  (sort: string) => ({ payload: sort })
-);
-
-export const setDataLoadingStatus = createAction(
-  'data/setDataLoadingStatus',
+export const setReviewFormBlocked = createAction(
+  'data/setReviewFormBlocked',
   (status: boolean) => ({payload: status})
 );
-
