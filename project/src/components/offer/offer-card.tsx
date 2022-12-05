@@ -1,4 +1,5 @@
 import { Offer } from '../../types/offer';
+import { AppRoute } from '../../const';
 import CardPremiumMark from './card/card-premium-mark';
 import CardPreview from './card/card-preview';
 import CardPrice from './card/card-price';
@@ -26,7 +27,7 @@ function OfferCard({
     rating,
     isPremium
   } = offer;
-  const link = `/offer/${id}`;
+  const link = `${AppRoute.Room}/${id}`;
   return (
     <article
       className="cities__card place-card"

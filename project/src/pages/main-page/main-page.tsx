@@ -10,7 +10,7 @@ import Loader from '../../components/loader/loader';
 import OffersSection from '../../components/offer/offers-section';
 
 function MainPage(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
   const offers = useAppSelector(getSortedOffers);
   const activeCity = useAppSelector((state) => state.activeCity);
   const mainClassName =
@@ -36,7 +36,7 @@ function MainPage(): JSX.Element {
         </div>
         <div className="cities">
           {
-            isOffersDataLoading
+            isDataLoading
               ? <Loader />
               :
               <OffersSection

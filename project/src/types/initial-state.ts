@@ -7,9 +7,12 @@ import { Review } from '../types/review';
 export type InitialState = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData;
-  isOffersDataLoading: boolean;
+  isDataLoading: boolean;
   activeCity: City;
   activeSort: string;
   offers: Offer[];
-  reviews: Review[];
+  selectedOffer: Offer | null;
+  otherOffers: Offer[] | null;
+  reviews: Review[] | null;
+  isReviewFormBlocked: boolean;
 }

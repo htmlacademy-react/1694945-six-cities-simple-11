@@ -1,10 +1,21 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { AuthorizationStatus, OTHER_OFFERS_LIST_LENGTH } from '../../const';
+import { store } from '../../store/store';
+import {
+  fetchSelectedOfferAction,
+  fetchOtherOffersAction,
+  fetchReviewsAction,
+} from '../../store/api-actions';
+import {
+  AuthorizationStatus,
+  Photo
+} from '../../const';
 import { getSortedReviews } from '../../utils';
-import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import Loader from '../../components/loader/loader';
 import Header from '../../components/header/header';
+import Nav from '../../components/nav/nav';
 import PropertyGallery from '../../components/property/property-gallery';
 import PropertyPremiumMark from '../../components/property/property-premium-mark';
 import PropertyReviews from '../../components/property/property-reviews';
@@ -18,13 +29,27 @@ import OffersOther from '../../components/offer/offers-other';
 import Map from '../../components/map/map';
 
 function PropertyPage(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const { id } = useParams();
+  const offerId = Number(id);
+
+  useEffect(() => {
+    store.dispatch(fetchSelectedOfferAction(offerId));
+    store.dispatch(fetchOtherOffersAction(offerId));
+    store.dispatch(fetchReviewsAction(offerId));
+  }, [offerId]);
+
+  const selectedOffer = useAppSelector((state) => state.selectedOffer);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const otherOffers = useAppSelector((state) => state.otherOffers);
+  const areOtherOffersAvailable = otherOffers && otherOffers.length > 0;
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus
+  );
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   const reviews = useAppSelector((state) => state.reviews);
-  const offers = useAppSelector((state) => state.offers);
-  const foundOffer = offers.find((offer) => offer.id === Number(id));
-  if (foundOffer === undefined) {
-    return <NotFoundPage />;
+
+  if (!selectedOffer || isDataLoading) {
+    return <Loader />;
   }
   const {
     images,
@@ -38,45 +63,41 @@ function PropertyPage(): JSX.Element {
     goods,
     description,
     host,
-    location
-  } = foundOffer;
-  const imagesList = images
-    .map((image, index) => (
-      <div
-        key={image}
-        className="property__image-wrapper"
-      >
-        <img
-          className="property__image"
-          src={image}
-          alt={`IMG_${index}`}
-        />
-      </div>
-    ));
-  const goodsList = goods
-    .map((good) => (
-      <li
-        key={good}
-        className="property__inside-item"
-      >
-        {good}
-      </li>
-    ));
-  const filteredReviews = getSortedReviews(reviews.filter(
-    (review) => review.hotelId === Number(id)
+    location,
+    city,
+  } = selectedOffer;
+  const imagesList = images.map((image, index) => (
+    <div key={image} className="property__image-wrapper">
+      <img
+        className="property__image"
+        src={image}
+        alt={`IMG_${index + Photo.MinNumber}`}
+      />
+    </div>
   ));
-  const otherOffers = offers.filter(
-    (offer) => offer.id !== Number(id) && offer.city.name === foundOffer.city.name
-  ).slice(0, OTHER_OFFERS_LIST_LENGTH);
+  const goodsList = goods.map((good) => (
+    <li
+      key={good}
+      className="property__inside-item"
+    >
+      {good}
+    </li>
+  ));
+  const areReviewsAvailable = reviews && reviews.length > 0;
   return (
     <div className="page">
       <Helmet>
-        <title>Selected Offer</title>
+        <title>{`${city.name} — ${title}`}</title>
       </Helmet>
-      <Header />
+      <Header>
+        <Nav />
+      </Header>
       <main className="page__main page__main--property">
         <section className="property">
-          <PropertyGallery gallery={imagesList} />
+          {
+            imagesList.length > 0 &&
+            <PropertyGallery gallery={imagesList.slice(0, Photo.MaxNumberInGallery)} />
+          }
           <div className="property__container container">
             <div className="property__wrapper">
               {isPremium && <PropertyPremiumMark />}
@@ -88,42 +109,39 @@ function PropertyPage(): JSX.Element {
                 maxAdults={maxAdults}
               />
               <PropertyPrice price={price} />
-              <PropertyGoods goods={goodsList} />
+              {
+                goodsList.length > 0 &&
+                <PropertyGoods goods={goodsList} />
+              }
               <PropertyHost
                 host={host}
                 description={description}
               />
-              {
-                (filteredReviews.length > 0
-                  ||
-                  authorizationStatus === AuthorizationStatus.Auth
-                ) &&
+              {(areReviewsAvailable || isAuthorized) && (
                 <PropertyReviews
                   authorizationStatus={authorizationStatus}
-                  reviews={filteredReviews}
+                  reviews={getSortedReviews(reviews)}
+                  selectedOffer={offerId}
                 />
-              }
+              )}
             </div>
           </div>
-          {
-            otherOffers.length > 0 &&
+          {areOtherOffersAvailable && (
             <Map
               className={'property__map map'}
               location={location}
-              offers={[...otherOffers, foundOffer]}
-              selectedOffer={Number(id)}
+              offers={[...otherOffers, selectedOffer]}
+              selectedOffer={offerId}
             />
-          }
+          )}
         </section>
-        {
-          otherOffers.length > 0 &&
+        {areOtherOffersAvailable && (
           <div className="container">
             <OffersOther offers={otherOffers} />
           </div>
-        }
+        )}
       </main>
     </div>
   );
 }
-
 export default PropertyPage;

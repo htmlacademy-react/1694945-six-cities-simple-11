@@ -2,8 +2,14 @@ import { City } from './types/city';
 export enum AppRoute {
   Main = '/',
   Login = '/login',
-  Room = '/offer/:id',
+  Room = '/offer',
   NotFound = '*',
+}
+export enum APIRoute {
+  Offers = '/hotels',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout',
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -28,14 +34,17 @@ export enum FormatDate {
   Month = 'long',
   Year = 'numeric',
 }
+export enum Photo {
+  MinNumber = 1,
+  MaxNumberInGallery = 6,
+}
 export enum Rating {
   Max = 5,
   MultiplyValue = 20,
 }
-export enum APIRoute {
-  Offers = '/hotels',
-  Login = '/login',
-  Logout = '/logout',
+export enum TextAreaProperites {
+  MinLength = 50,
+  MaxLength = 300
 }
 export const ACCOMODAION_TYPES = Object.freeze({
   apartment: 'Apartment',
@@ -124,7 +133,6 @@ export const SORT_TYPES = Object.freeze([
   'Top rated first',
 ]);
 export const ACTIVE_SORT = SORT_TYPES[0];
-export const OTHER_OFFERS_LIST_LENGTH = 3;
 export const REVIEWS_LIST_LENGTH = 10;
 export const LAYER_OPTION = {
   url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',

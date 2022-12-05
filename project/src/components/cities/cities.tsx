@@ -9,7 +9,7 @@ type CitiesProps = {
 
 function Cities({ cities, activeCity }: CitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const citiesListItems = cities.map((city) => {
+  const citiesList = cities.map((city) => {
     const isActiveCity = city.name === activeCity.name;
     return (
       <li key={city.name} className="locations__item">
@@ -30,7 +30,7 @@ function Cities({ cities, activeCity }: CitiesProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {citiesListItems}
+        {citiesList}
       </ul>
     </section>
   );

@@ -1,7 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
+import { UserData } from '../types/user-data';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
-import { UserData } from '../types/user-data';
+import { Review } from '../types/review';
 import { AppRoute, AuthorizationStatus } from '../const';
 
 export const redirectToRoute = createAction(
@@ -19,23 +20,42 @@ export const loadUserData = createAction(
   (userData: UserData) => ({payload: userData})
 );
 
-export const changeCity = createAction(
-  'city/changeCity',
-  (city: City) => ({ payload: city })
-);
-
-export const loadOffers = createAction(
-  'offers/loadOffers',
-  (offers: Offer[]) => ({payload: offers})
-);
-
-export const setActiveSort = createAction(
-  'sort/setActiveSort',
-  (sort: string) => ({ payload: sort })
-);
-
-export const setOffersDataLoadingStatus = createAction(
-  'data/setOffersDataLoadingStatus',
+export const setDataLoadingStatus = createAction(
+  'data/setDataLoadingStatus',
   (status: boolean) => ({payload: status})
 );
 
+export const changeCity = createAction(
+  'data/changeCity',
+  (city: City) => ({ payload: city })
+);
+
+export const setActiveSort = createAction(
+  'data/setActiveSort',
+  (sort: string) => ({ payload: sort })
+);
+
+export const loadOffers = createAction(
+  'data/loadOffers',
+  (offers: Offer[]) => ({payload: offers})
+);
+
+export const loadSelectedOffer = createAction(
+  'data/loadSelectedOffer',
+  (selectedOffer: Offer) => ({payload: selectedOffer})
+);
+
+export const loadOtherOffers = createAction(
+  'data/loadOtherOffers',
+  (otherOffers: Offer[]) => ({payload: otherOffers})
+);
+
+export const loadReviews = createAction(
+  'data/loadReviews',
+  (reviews: Review[]) => ({payload: reviews})
+);
+
+export const setReviewFormBlocked = createAction(
+  'data/setReviewFormBlocked',
+  (status: boolean) => ({payload: status})
+);

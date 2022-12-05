@@ -1,17 +1,23 @@
 import { AuthorizationStatus } from '../../const';
 import { Review } from '../../types/review';
+import { OfferId } from '../../types/offer';
 import { calculateRatingWidth, formatDate } from '../../utils';
 import ReviewForm from './review/review-form';
 
 type PropertyReviewsProps = {
   authorizationStatus: AuthorizationStatus;
-  reviews: Review[];
+  reviews: Review[] | null;
+  selectedOffer: OfferId;
 };
 
-function PropertyReviews({ authorizationStatus, reviews }: PropertyReviewsProps): JSX.Element {
+function PropertyReviews({
+  authorizationStatus,
+  reviews,
+  selectedOffer
+}: PropertyReviewsProps): JSX.Element {
   return (
     <section className="property__reviews reviews">
-      {reviews.length > 0 &&
+      {reviews && reviews.length > 0 &&
         <>
           <h2 className="reviews__title">
             Reviews · <span className="reviews__amount">{reviews.length}</span>
@@ -50,7 +56,11 @@ function PropertyReviews({ authorizationStatus, reviews }: PropertyReviewsProps)
             ))}
           </ul>
         </>}
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
+      {
+        authorizationStatus === AuthorizationStatus.Auth
+        &&
+        <ReviewForm selectedOffer={selectedOffer} />
+      }
     </section>
   );
 }
