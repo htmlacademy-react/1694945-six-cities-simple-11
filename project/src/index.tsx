@@ -7,8 +7,8 @@ import App from './components/app/app';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-store.dispatch(checkAuthorizeAction());
-store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthorizeAction(null));
+store.dispatch(fetchOffersAction(null));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

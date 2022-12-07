@@ -31,7 +31,7 @@ function UserAuthorized(): JSX.Element {
           href={AppRoute.Login}
           onClick={(event: MouseEvent) => {
             event.preventDefault();
-            dispatch(logoutAction());
+            dispatch(logoutAction(null));
           }}
         >
           <span className="header__signout">Sign out</span>

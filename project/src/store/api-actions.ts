@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { Offer, OfferId } from '../types/offer';
+import { Offer } from '../types/offer';
 import { Review, ReviewData } from '../types/review';
 import {
   requireAuthorization,
@@ -21,7 +21,7 @@ import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 
 export const checkAuthorizeAction = createAsyncThunk<
   void,
-  undefined,
+  null,
   {
     dispatch: AppDispatch;
     state: State;
@@ -61,7 +61,7 @@ export const loginAction = createAsyncThunk<
 
 export const logoutAction = createAsyncThunk<
   void,
-  undefined,
+  null,
   {
     dispatch: AppDispatch;
     state: State;
@@ -75,7 +75,7 @@ export const logoutAction = createAsyncThunk<
 
 export const fetchOffersAction = createAsyncThunk<
   void,
-  undefined,
+  null,
   {
     dispatch: AppDispatch;
     state: State;
@@ -88,7 +88,7 @@ export const fetchOffersAction = createAsyncThunk<
   dispatch(loadOffers(data));
 });
 
-export const fetchSelectedOfferAction = createAsyncThunk<void, OfferId, {
+export const fetchSelectedOfferAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -109,7 +109,7 @@ export const fetchSelectedOfferAction = createAsyncThunk<void, OfferId, {
 
 export const fetchOtherOffersAction = createAsyncThunk<
   void,
-  OfferId,
+  number,
   {
     dispatch: AppDispatch;
     state: State;
@@ -122,7 +122,7 @@ export const fetchOtherOffersAction = createAsyncThunk<
   dispatch(loadOtherOffers(data));
 });
 
-export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
+export const fetchReviewsAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
