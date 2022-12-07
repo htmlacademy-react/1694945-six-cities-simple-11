@@ -17,6 +17,7 @@ import Loader from '../../components/loader/loader';
 import Header from '../../components/header/header';
 import Nav from '../../components/nav/nav';
 import PropertyGallery from '../../components/property/property-gallery';
+import GalleryImage from '../../components/property/gallery/gallery-image';
 import PropertyPremiumMark from '../../components/property/property-premium-mark';
 import PropertyReviews from '../../components/property/property-reviews';
 import PropertyTitle from '../../components/property/property-title';
@@ -66,16 +67,14 @@ function PropertyPage(): JSX.Element {
     location,
     city,
   } = selectedOffer;
-  const imagesList = images.map((image, index) => (
-    <div key={image} className="property__image-wrapper">
-      <img
-        className="property__image"
-        src={image}
-        alt={`IMG_${index + Photo.MinNumber}`}
-      />
-    </div>
+  const imagesListItems = images.map((image, index) => (
+    <GalleryImage
+      key={image}
+      src={image}
+      alt={`IMG_${index + Photo.MinNumber}`}
+    />
   ));
-  const goodsList = goods.map((good) => (
+  const goodsListItems = goods.map((good) => (
     <li
       key={good}
       className="property__inside-item"
@@ -95,8 +94,8 @@ function PropertyPage(): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           {
-            imagesList.length > 0 &&
-            <PropertyGallery gallery={imagesList.slice(0, Photo.MaxNumberInGallery)} />
+            imagesListItems.length > 0 &&
+            <PropertyGallery gallery={imagesListItems.slice(0, Photo.MaxNumberInGallery)} />
           }
           <div className="property__container container">
             <div className="property__wrapper">
@@ -110,8 +109,8 @@ function PropertyPage(): JSX.Element {
               />
               <PropertyPrice price={price} />
               {
-                goodsList.length > 0 &&
-                <PropertyGoods goods={goodsList} />
+                goodsListItems.length > 0 &&
+                <PropertyGoods goods={goodsListItems} />
               }
               <PropertyHost
                 host={host}
