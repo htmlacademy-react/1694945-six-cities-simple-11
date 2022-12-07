@@ -42,9 +42,9 @@ export enum Rating {
   Max = 5,
   MultiplyValue = 20,
 }
-export enum TextAreaProperites {
-  MinLength = 50,
-  MaxLength = 300
+export enum ReviewLength {
+  Min = 50,
+  Max = 300
 }
 export const ACCOMODAION_TYPES = Object.freeze({
   apartment: 'Apartment',

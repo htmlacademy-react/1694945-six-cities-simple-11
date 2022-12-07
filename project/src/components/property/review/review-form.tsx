@@ -3,15 +3,14 @@ import { useAppSelector } from '../../../hooks/use-app-selector';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { setReviewFormBlocked } from '../../../store/actions';
 import { sendReviewAction } from '../../../store/api-actions';
-import { OfferId } from '../../../types/offer';
 import {
   MARKS,
-  TextAreaProperites
+  ReviewLength
 } from '../../../const';
 import { getPluralWord } from '../../../utils';
 
 type ReviewFormProps = {
-  selectedOffer: OfferId;
+  selectedOffer: number;
 };
 
 function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
@@ -44,9 +43,9 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
 
   };
 
-  const isSubmitButtonDisabled = formData.review.length < TextAreaProperites.MinLength
+  const isSubmitButtonDisabled = formData.review.length < ReviewLength.Min
     ||
-    formData.review.length > TextAreaProperites.MaxLength
+    formData.review.length > ReviewLength.Max
     ||
     formData.rating === ''
     ||
@@ -105,7 +104,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
           <span className="reviews__star">rating</span> and describe your stay
           with at least&nbsp;
           <b className="reviews__text-amount">
-            {`${TextAreaProperites.MinLength} characters`}
+            {`${ReviewLength.Min} characters`}
           </b>.
         </p>
         <button
