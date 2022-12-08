@@ -1,7 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { loginAction } from '../../store/api-actions';
+import { loginAction } from '../../store/user-process/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { LOGIN_FIELDS } from '../../const';
+import { LOGIN_FIELDS, PASSWORD_PATTERN } from '../../const';
 import InputField from '../../components/input-field/input-field';
 
 export default function LoginPage(): JSX.Element {
@@ -20,7 +20,7 @@ export default function LoginPage(): JSX.Element {
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if (formData.email && formData.password) {
+    if (formData.email && formData.password && formData.password.match(PASSWORD_PATTERN)) {
       dispatch(loginAction({
         login: formData.email,
         password: formData.password
