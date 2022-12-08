@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, ACTIVE_CITY, ACTIVE_SORT } from '../../const';
 import { OffersProcess } from '../../types/state';
-import { fetchOffersAction } from '../api-actions';
+import { fetchOffersAction } from './api-actions';
 import { setActiveCity, setActiveSort } from './actions';
-import { ACTIVE_CITY, ACTIVE_SORT } from '../../const';
+import { Offer } from '../../types/offer';
 
 const initialState: OffersProcess = {
-  offers: null,
+  offers: [] as Offer[],
   areOffersLoading: false,
-  hasError: false,
+  hasOffersLoadingError: false,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT
 };
@@ -21,7 +21,7 @@ export const offersProcess = createSlice({
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.areOffersLoading = true;
-        state.hasError = false;
+        state.hasOffersLoadingError = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.areOffersLoading = false;
@@ -29,7 +29,7 @@ export const offersProcess = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.areOffersLoading = false;
-        state.hasError = true;
+        state.hasOffersLoadingError = true;
       })
       .addCase(setActiveCity, (state, action) => {
         state.activeCity = action.payload;
