@@ -1,6 +1,6 @@
 import { City } from '../../types/city';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { changeCity } from '../../store/actions';
+import { setActiveCity } from '../../store/offers-process/actions';
 
 type CityListItemProps = {
   data: City;
@@ -10,7 +10,7 @@ function CityListItem({ data, isActive }: CityListItemProps): JSX.Element {
   const dispatch = useAppDispatch();
   const clickHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    dispatch(changeCity(data));
+    dispatch(setActiveCity(data));
   };
   return (
     <li key={data.name} className="locations__item">

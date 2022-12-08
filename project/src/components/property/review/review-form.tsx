@@ -1,7 +1,7 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { useAppSelector } from '../../../hooks/use-app-selector';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
-import { setReviewFormBlocked } from '../../../store/actions';
+import { setReviewFormBlocked } from '../../../store/property-process/actions';
 import { sendReviewAction } from '../../../store/api-actions';
 import {
   MARKS,
