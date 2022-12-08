@@ -3,16 +3,11 @@ import { UserData } from '../types/user-data';
 import { City } from '../types/city';
 import { Offer } from '../types/offer';
 import { Review } from '../types/review';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute } from '../const';
 
 export const redirectToRoute = createAction(
   'app/redirectToRoute',
   (route: AppRoute) => ({payload: route})
-);
-
-export const requireAuthorization = createAction(
-  'user/requireAuthorization',
-  (status: AuthorizationStatus) => ({payload: status})
 );
 
 export const loadUserData = createAction(
@@ -20,8 +15,18 @@ export const loadUserData = createAction(
   (userData: UserData) => ({payload: userData})
 );
 
-export const setDataLoadingStatus = createAction(
-  'data/setDataLoadingStatus',
+export const setOffersLoadingStatus = createAction(
+  'data/setOffersLoadingStatus',
+  (status: boolean) => ({payload: status})
+);
+
+export const setOtherOffersLoadingStatus = createAction(
+  'data/setOtherOffersLoadingStatus',
+  (status: boolean) => ({payload: status})
+);
+
+export const setReviewsLoadingStatus = createAction(
+  'data/setReviewsLoadingStatus',
   (status: boolean) => ({payload: status})
 );
 
@@ -30,8 +35,8 @@ export const changeCity = createAction(
   (city: City) => ({ payload: city })
 );
 
-export const setActiveSort = createAction(
-  'data/setActiveSort',
+export const changeSort = createAction(
+  'data/changeSort',
   (sort: string) => ({ payload: sort })
 );
 

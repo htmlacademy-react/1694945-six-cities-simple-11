@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setActiveSort } from '../../store/actions';
+import { changeSort } from '../../store/actions';
 import SortListItem from './sort/offers-sort-list-item';
 
 type OffersSortProps = {
@@ -13,7 +13,7 @@ function OffersSort({ sortTypes, activeSort }: OffersSortProps): JSX.Element {
   const dispatch = useAppDispatch();
   const sortsListItems = sortTypes.map((type) => {
     const handleClick = () => {
-      dispatch(setActiveSort(type));
+      dispatch(changeSort(type));
       openMenu(false);
     };
     return (
