@@ -1,6 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getSortedOffers } from '../../store/selectors';
+import {
+  getOffersLoadingStatus,
+  getOffers,
+  getActiveCity,
+  getOffersLoadingError
+} from '../../store/offers-process/selectors';
 import { CITIES } from '../../const';
 import HeaderSvg from '../../components/header/header-svg';
 import Header from '../../components/header/header';
@@ -8,15 +13,21 @@ import Nav from '../../components/nav/nav';
 import Cities from '../../components/cities/cities';
 import Loader from '../../components/loader/loader';
 import OffersSection from '../../components/offer/offers-section';
+import ErrorScreen from '../../components/offer/error-screen/error-screen';
+
 
 function MainPage(): JSX.Element {
-  const areOffersLoading = useAppSelector((state) => state.areOffersLoading);
-  const offers = useAppSelector(getSortedOffers);
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const areOffersLoading = useAppSelector(getOffersLoadingStatus);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getActiveCity);
   const mainClassName =
     offers.length > 0
       ? 'page page--gray page--main'
       : 'page__main page__main--index page__main--index-empty';
+  const hasError = useAppSelector(getOffersLoadingError);
+  if (hasError) {
+    return <ErrorScreen />;
+  }
   return (
     <div className="page page--gray page--main">
       <Helmet>

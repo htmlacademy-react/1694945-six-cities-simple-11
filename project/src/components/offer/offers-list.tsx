@@ -3,9 +3,10 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { Offer } from '../../types/offer';
 import { City } from '../../types/city';
 import { SORT_TYPES } from '../../const';
+import { getPluralWord } from '../../utils';
+import { getActiveSortType } from '../../store/offers-process/selectors';
 import OfferCard from './offer-card';
 import OffersSort from './offers-sort';
-import { getPluralWord } from '../../utils';
 import Map from '../../components/map/map';
 
 type OffersListProps = {
@@ -23,7 +24,7 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
       onMouseOut={() => setActiveCard(0)}
     />
   ));
-  const activeSort = useAppSelector((state) => state.activeSort);
+  const activeSort = useAppSelector(getActiveSortType);
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">

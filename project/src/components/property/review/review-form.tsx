@@ -1,13 +1,16 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { useAppSelector } from '../../../hooks/use-app-selector';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
+import { getReviewFormBlockedStatus } from '../../../store/property-process/selectors';
+import { sendReviewAction } from '../../../store/property-process/api-actions';
 import { setReviewFormBlocked } from '../../../store/property-process/actions';
-import { sendReviewAction } from '../../../store/api-actions';
+
 import {
   MARKS,
   ReviewLength
 } from '../../../const';
 import { getPluralWord } from '../../../utils';
+
 
 type ReviewFormProps = {
   selectedOffer: number;
@@ -15,7 +18,7 @@ type ReviewFormProps = {
 
 function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const isReviewFormBlocked = useAppSelector((state) => state.isReviewFormBlocked);
+  const isReviewFormBlocked = useAppSelector(getReviewFormBlockedStatus);
   const [formData, setFormData] = useState({
     rating: '',
     review: ''
