@@ -51,7 +51,7 @@ export const propertyProcess = createSlice({
         state.areOtherOffersLoading = false;
         state.otherOffers = action.payload;
       })
-      .addCase(fetchSelectedOfferAction.rejected, (state) => {
+      .addCase(fetchOtherOffersAction.rejected, (state) => {
         state.areOtherOffersLoading = false;
         state.hasSelectedOfferLoadingError = true;
         state.otherOffers = null;
@@ -63,7 +63,7 @@ export const propertyProcess = createSlice({
         state.areReviewsLoading = false;
         state.reviews = action.payload;
       })
-      .addCase(fetchSelectedOfferAction.rejected, (state) => {
+      .addCase(fetchReviewsAction.rejected, (state) => {
         state.areReviewsLoading = false;
         state.hasReviewsLoadingError = true;
         state.reviews = null;
