@@ -1,11 +1,12 @@
 import { MouseEvent } from 'react';
 import { AppRoute } from '../../../const';
-import { logoutAction } from '../../../store/api-actions';
+import { logoutAction } from '../../../store/user-process/api-actions';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../../hooks/use-app-selector';
+import { getUserData } from '../../../store/user-process/selectors';
 
 function UserAuthorized(): JSX.Element {
-  const { name, email, avatarUrl } = useAppSelector((state) => state.userData);
+  const { name, email, avatarUrl } = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
   return (
     <>

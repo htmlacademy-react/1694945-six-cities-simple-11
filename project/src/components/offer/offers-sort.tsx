@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setActiveSort } from '../../store/actions';
+import { setActiveSort } from '../../store/offers-process/actions';
+import SortListItem from './sort/offers-sort-list-item';
 
 type OffersSortProps = {
   sortTypes: readonly string[];
@@ -10,6 +11,20 @@ type OffersSortProps = {
 function OffersSort({ sortTypes, activeSort }: OffersSortProps): JSX.Element {
   const [isMenuOpened, openMenu] = useState(false);
   const dispatch = useAppDispatch();
+  const sortsListItems = sortTypes.map((type) => {
+    const handleClick = () => {
+      dispatch(setActiveSort(type));
+      openMenu(false);
+    };
+    return (
+      <SortListItem
+        key={type}
+        type={type}
+        isActive={type === activeSort}
+        handleClick={handleClick}
+      />);
+  });
+  const handleOpenMenu = () => openMenu(true);
   return (
     <form
       className="places__sorting"
@@ -20,7 +35,7 @@ function OffersSort({ sortTypes, activeSort }: OffersSortProps): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => openMenu(true)}
+        onClick={handleOpenMenu}
       >
         &nbsp;{activeSort}
         <svg
@@ -34,21 +49,7 @@ function OffersSort({ sortTypes, activeSort }: OffersSortProps): JSX.Element {
       <ul
         className={`places__options places__options--custom${isMenuOpened ? ' places__options--opened' : ''}`}
       >
-        {sortTypes.map((type) => (
-          <li
-            key={type}
-            className={`places__option${type === activeSort ? ' places__option--active' : ''}`}
-            tabIndex={0}
-            onClick={
-              () => {
-                dispatch(setActiveSort(type));
-                openMenu(false);
-              }
-            }
-          >
-            {type}
-          </li>
-        ))}
+        {sortsListItems}
       </ul>
     </form >
   );

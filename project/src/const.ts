@@ -42,9 +42,14 @@ export enum Rating {
   Max = 5,
   MultiplyValue = 20,
 }
-export enum TextAreaProperites {
-  MinLength = 50,
-  MaxLength = 300
+export enum ReviewLength {
+  Min = 50,
+  Max = 300,
+}
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Property = 'PROPERTY'
 }
 export const ACCOMODAION_TYPES = Object.freeze({
   apartment: 'Apartment',
@@ -79,51 +84,51 @@ export const CITIES: City[] = [
   {
     name: 'Paris',
     location: {
-      latitude: 48.8534100,
-      longitude: 2.3488000,
+      latitude: 48.85341,
+      longitude: 2.3488,
       zoom: Zoom.ActiveCity,
-    }
+    },
   },
   {
     name: 'Cologne',
     location: {
-      latitude: 50.9333300,
-      longitude: 6.9500000,
+      latitude: 50.93333,
+      longitude: 6.95,
       zoom: Zoom.ActiveCity,
-    }
+    },
   },
   {
     name: 'Brussels',
     location: {
-      latitude: 50.8504500,
-      longitude: 4.3487800,
+      latitude: 50.85045,
+      longitude: 4.34878,
       zoom: Zoom.ActiveCity,
-    }
+    },
   },
   {
     name: 'Amsterdam',
     location: {
-      latitude: 52.3740300,
-      longitude: 4.8896900,
+      latitude: 52.37403,
+      longitude: 4.88969,
       zoom: Zoom.ActiveCity,
-    }
+    },
   },
   {
     name: 'Hamburg',
     location: {
-      latitude: 53.5753200,
-      longitude: 10.0153400,
+      latitude: 53.57532,
+      longitude: 10.01534,
       zoom: Zoom.ActiveCity,
-    }
+    },
   },
   {
     name: 'Dusseldorf',
-    location:{
-      latitude: 51.2217200,
-      longitude: 6.7761600,
+    location: {
+      latitude: 51.22172,
+      longitude: 6.77616,
       zoom: Zoom.ActiveCity,
-    }
-  }
+    },
+  },
 ];
 export const ACTIVE_CITY = CITIES[0];
 export const SORT_TYPES = Object.freeze([
@@ -136,10 +141,12 @@ export const ACTIVE_SORT = SORT_TYPES[0];
 export const REVIEWS_LIST_LENGTH = 10;
 export const LAYER_OPTION = {
   url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 };
 export const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 export const REQUEST_TIMEOUT = 5000;
 export const AUTHORIZATION_TOKEN_KEY_NAME = 'six-cities-simple-token';
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const LOGIN_FIELDS = Object.freeze(['email', 'password']);
+export const PASSWORD_PATTERN = /^\S*(?=\S{1,})(?=\S*[a-zA-Z])(?=\S*[\d])\S*$/;
