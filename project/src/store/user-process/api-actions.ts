@@ -9,7 +9,7 @@ import { loadUserData, redirectToRoute } from '../actions';
 
 export const checkAuthorizeAction = createAsyncThunk<
   void,
-  null,
+  undefined,
   {
     dispatch: AppDispatch;
     state: State;
@@ -43,7 +43,7 @@ export const loginAction = createAsyncThunk<
 
 export const logoutAction = createAsyncThunk<
   void,
-  null,
+  undefined,
   {
     dispatch: AppDispatch;
     state: State;

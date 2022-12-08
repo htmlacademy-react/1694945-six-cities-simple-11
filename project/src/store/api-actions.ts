@@ -1,38 +1,18 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-/*import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';*/
 import { Offer } from '../types/offer';
 import { Review, ReviewData } from '../types/review';
 import {
-  //requireAuthorization,
   redirectToRoute,
-  //loadUserData,
   setOffersLoadingStatus,
-  loadOffers,
   loadOtherOffers,
   loadSelectedOffer,
   loadReviews,
   setReviewFormBlocked,
 } from './actions';
 
-import { APIRoute, AppRoute /*, AuthorizationStatus*/ } from '../const';
-
-export const fetchOffersAction = createAsyncThunk<
-  void,
-  null,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setOffersLoadingStatus(true));
-  const { data } = await api.get<Offer[]>(APIRoute.Offers);
-  dispatch(setOffersLoadingStatus(false));
-  dispatch(loadOffers(data));
-});
+import { APIRoute, AppRoute } from '../const';
 
 export const fetchSelectedOfferAction = createAsyncThunk<
   void,
