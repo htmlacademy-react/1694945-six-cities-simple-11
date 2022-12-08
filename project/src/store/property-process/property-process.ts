@@ -7,7 +7,7 @@ import {
   fetchReviewsAction,
   sendReviewAction,
 } from './api-actions';
-import { redirectToRoute } from '../actions';
+import { redirectToRoute } from './actions';
 import { Review } from '../../types/review';
 import { NameSpace, AppRoute } from '../../const';
 
