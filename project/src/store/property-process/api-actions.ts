@@ -3,14 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../../types/state.js';
 import { Offer } from '../../types/offer';
 import { Review, ReviewData } from '../../types/review';
-/*import {
-  redirectToRoute,
-  setOffersLoadingStatus,
-  loadOtherOffers,
-  loadSelectedOffer,
-  loadReviews,
-  setReviewFormBlocked,
-} from './actions';*/
 
 import { APIRoute } from '../../const';
 
