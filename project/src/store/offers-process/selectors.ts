@@ -13,4 +13,4 @@ export const getOffers = (state: State) => orderOffersByType(
   state[NameSpace.Offers].activeSort
 );
 export const getOffersLoadingStatus = (state: State): boolean => state[NameSpace.Offers].areOffersLoading;
-
+export const getOffersLoadingError = (state: State): boolean => state[NameSpace.Offers].hasOffersLoadingError;
