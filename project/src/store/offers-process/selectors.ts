@@ -5,7 +5,7 @@ import { orderOffersByType, getOffersByCity } from '../../utils';
 
 export const getActiveCity = (state: State): City => state[NameSpace.Offers].activeCity;
 export const getActiveSortType = (state: State) => state[NameSpace.Offers].activeSort;
-export const getSortedOffers = (state: State) => orderOffersByType(
+export const getOffers = (state: State) => orderOffersByType(
   getOffersByCity(
     state[NameSpace.Offers].offers,
     state[NameSpace.Offers].activeCity.name
