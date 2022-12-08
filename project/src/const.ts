@@ -48,7 +48,8 @@ export enum ReviewLength {
 }
 export enum NameSpace {
   User = 'USER',
-  Offers = 'OFFERS'
+  Offers = 'OFFERS',
+  Property = 'PROPERTY'
 }
 export const ACCOMODAION_TYPES = Object.freeze({
   apartment: 'Apartment',
