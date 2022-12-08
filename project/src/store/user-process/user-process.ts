@@ -3,7 +3,7 @@ import { NameSpace, AuthorizationStatus } from '../../const';
 import { UserProcess } from '../../types/state';
 import { UserData } from '../../types/user-data';
 import { checkAuthorizeAction, loginAction, logoutAction } from './api-actions';
-import { loadUserData } from '../actions';
+import { loadUserData } from './actions';
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,

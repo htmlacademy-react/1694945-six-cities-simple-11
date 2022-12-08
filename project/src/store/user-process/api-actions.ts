@@ -5,7 +5,7 @@ import { AuthData } from '../../types/auth-data';
 import { UserData } from '../../types/user-data';
 import { APIRoute, AppRoute } from '../../const';
 import { saveToken, dropToken } from '../../services/token';
-import { loadUserData, redirectToRoute } from '../actions';
+import { loadUserData, redirectToRoute } from './actions';
 
 export const checkAuthorizeAction = createAsyncThunk<
   void,
