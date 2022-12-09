@@ -5,12 +5,17 @@ import NoOffers from '../../components/offer/no-offers';
 
 type OffersSectionProps = {
   activeCity: City;
-  offers: Offer[];
+  offers: Offer[] | null;
 };
 
 function OffersSection({ activeCity, offers }: OffersSectionProps): JSX.Element {
-  return offers.length > 0
-    ? <OffersList offers={offers} city={activeCity} />
+  const areOffersAvailable = offers && offers.length > 0;
+  return areOffersAvailable
+    ?
+    <OffersList
+      offers={offers}
+      city={activeCity}
+    />
     : <NoOffers city={activeCity.name} />;
 }
 
