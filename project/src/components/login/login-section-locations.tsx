@@ -1,10 +1,25 @@
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { setActiveCity } from '../../store/offers-process/actions';
+import { getRandomInteger } from '../../utils';
+import { AppRoute, CITIES } from '../../const';
+
 function LoginSectionLocations(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const city = CITIES[getRandomInteger(CITIES.length)];
+  const clickHandler = () => { dispatch(setActiveCity(city)); };
   return (
     <section className="locations locations--login locations--current">
       <div className="locations__item">
-        <a className="locations__item-link" href="#todo">
-          <span>Amsterdam</span>
-        </a>
+        <Link
+          className="locations__item-link"
+          to={AppRoute.Main}
+          onClick={clickHandler}
+        >
+          <span>
+            {city.name}
+          </span>
+        </Link>
       </div>
     </section>
   );
