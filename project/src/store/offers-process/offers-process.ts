@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, ACTIVE_CITY, ACTIVE_SORT } from '../../const';
 import { OffersProcess } from '../../types/state';
 import { fetchOffersAction } from './api-actions';
-import { setActiveCity, setActiveSort } from './actions';
+import { City } from '../../types/city';
 import { Offer } from '../../types/offer';
 
 const initialState: OffersProcess = {
   offers: [] as Offer[],
   areOffersLoading: false,
-  hasOffersLoadingError: false,
+  //hasOffersLoadingError: false,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT
 };
@@ -16,27 +16,26 @@ const initialState: OffersProcess = {
 export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveCity: (state, action: PayloadAction<City>) => {
+      state.activeCity = action.payload;
+    },
+    setActiveSort: (state, action: PayloadAction<string>) => {
+      state.activeSort = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.areOffersLoading = true;
-        state.hasOffersLoadingError = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.areOffersLoading = false;
         state.offers = action.payload;
-        state.hasOffersLoadingError = false;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.areOffersLoading = false;
-        state.hasOffersLoadingError = true;
-      })
-      .addCase(setActiveCity, (state, action) => {
-        state.activeCity = action.payload;
-      })
-      .addCase(setActiveSort, (state, action) => {
-        state.activeSort = action.payload;
       });
   }
 });
+export const {setActiveCity, setActiveSort} = offersProcess.actions;

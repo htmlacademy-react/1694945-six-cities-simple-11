@@ -14,7 +14,6 @@ export type UserProcess = {
 export type OffersProcess = {
   offers: Offer[];
   areOffersLoading: boolean;
-  hasOffersLoadingError: boolean;
   activeCity: City;
   activeSort: string;
 };
