@@ -1,11 +1,13 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/user-process/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { LOGIN_FIELDS, PASSWORD_PATTERN } from '../../const';
+import { LOGIN_FIELDS, PASSWORD_PATTERN, AppRoute } from '../../const';
 import InputField from '../../components/input-field/input-field';
 
 export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -25,6 +27,12 @@ export default function LoginPage(): JSX.Element {
         login: formData.email,
         password: formData.password
       }));
+      setFormData({
+        email: '',
+        password: ''
+      });
+
+      navigate(AppRoute.Main);
     }
   };
 
