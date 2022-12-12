@@ -90,7 +90,7 @@ function PropertyPage(): JSX.Element {
   ));
   const areReviewsAvailable = reviews && reviews.length > 0;
   return (
-    <div className='page'>
+    <div className='page' data-testid="property-page">
       <Helmet>
         <title>{`${city.name} — ${title}`}</title>
       </Helmet>
