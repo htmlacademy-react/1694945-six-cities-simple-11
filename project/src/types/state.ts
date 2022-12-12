@@ -14,20 +14,14 @@ export type UserProcess = {
 export type OffersProcess = {
   offers: Offer[];
   areOffersLoading: boolean;
-  hasOffersLoadingError: boolean;
   activeCity: City;
   activeSort: string;
 };
-export type PropertiesProcess = {
+export type PropertyProcess = {
   selectedOffer: Offer | null;
   isSelectedOfferLoading: boolean;
   hasSelectedOfferLoadingError: boolean;
   otherOffers: Offer[] | null;
-  areOtherOffersLoading: boolean;
-  areOtherOffersLoadingError: boolean;
-  areReviewsLoading: boolean;
-  hasReviewsLoadingError: boolean;
   reviews: Review[] | null;
   isReviewFormBlocked: boolean;
-  hasReviewSendingError: boolean;
 };

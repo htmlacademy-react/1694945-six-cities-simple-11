@@ -4,11 +4,10 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import {
   getOtherOffers,
-  getOtherOffersLoadingStatus,
   getReviews,
-  getReviewsLoadingStatus,
   getSelectedOffer,
   getSelectedOfferLoadingStatus,
+  getSelectedOfferLoadingError,
 } from '../../store/property-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { store } from '../../store/store';
@@ -34,6 +33,7 @@ import PropertyGoods from '../../components/property/property-goods';
 import PropertyHost from '../../components/property/property-host';
 import OffersOther from '../../components/offer/offers-other';
 import Map from '../../components/map/map';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function PropertyPage(): JSX.Element {
   const { id } = useParams();
@@ -47,19 +47,18 @@ function PropertyPage(): JSX.Element {
 
   const selectedOffer = useAppSelector(getSelectedOffer);
   const isSelectedOfferLoading = useAppSelector(getSelectedOfferLoadingStatus);
+  const hasSelectedOfferLoadingError = useAppSelector(
+    getSelectedOfferLoadingError
+  );
   const otherOffers = useAppSelector(getOtherOffers);
-  const areOtherOffersLoading = useAppSelector(getOtherOffersLoadingStatus);
   const areOtherOffersAvailable = otherOffers && otherOffers.length > 0;
   const reviews = useAppSelector(getReviews);
-  const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
-  if (
-    !selectedOffer ||
-    isSelectedOfferLoading ||
-    areOtherOffersLoading ||
-    areReviewsLoading
-  ) {
+  if (hasSelectedOfferLoadingError) {
+    return <NotFoundPage />;
+  }
+  if (!selectedOffer || isSelectedOfferLoading) {
     return <Loader />;
   }
   const {
@@ -85,28 +84,28 @@ function PropertyPage(): JSX.Element {
     />
   ));
   const goodsListItems = goods.map((good) => (
-    <li key={good} className="property__inside-item">
+    <li key={good} className='property__inside-item'>
       {good}
     </li>
   ));
   const areReviewsAvailable = reviews && reviews.length > 0;
   return (
-    <div className="page">
+    <div className='page' data-testid="property-page">
       <Helmet>
         <title>{`${city.name} — ${title}`}</title>
       </Helmet>
       <Header>
         <Nav />
       </Header>
-      <main className="page__main page__main--property">
-        <section className="property">
+      <main className='page__main page__main--property'>
+        <section className='property'>
           {imagesListItems.length > 0 && (
             <PropertyGallery
               gallery={imagesListItems.slice(0, Photo.MaxNumberInGallery)}
             />
           )}
-          <div className="property__container container">
-            <div className="property__wrapper">
+          <div className='property__container container'>
+            <div className='property__wrapper'>
               {isPremium && <PropertyPremiumMark />}
               <PropertyTitle title={title} />
               <PropertyRating rating={rating} />
@@ -119,7 +118,10 @@ function PropertyPage(): JSX.Element {
               {goodsListItems.length > 0 && (
                 <PropertyGoods goods={goodsListItems} />
               )}
-              <PropertyHost host={host} description={description} />
+              <PropertyHost
+                host={host}
+                description={description}
+              />
               {(areReviewsAvailable || isAuthorized) && (
                 <PropertyReviews
                   authorizationStatus={authorizationStatus}
@@ -139,7 +141,7 @@ function PropertyPage(): JSX.Element {
           )}
         </section>
         {areOtherOffersAvailable && (
-          <div className="container">
+          <div className='container'>
             <OffersOther offers={otherOffers} />
           </div>
         )}

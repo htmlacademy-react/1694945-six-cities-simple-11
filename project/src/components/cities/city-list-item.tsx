@@ -1,6 +1,6 @@
 import { City } from '../../types/city';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setActiveCity } from '../../store/offers-process/actions';
+import { setActiveCity } from '../../store/offers-process/offers-process';
 
 type CityListItemProps = {
   data: City;

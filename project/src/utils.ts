@@ -56,3 +56,13 @@ export const getSortedReviews = (reviews: Review[] | null): Review[] | null => {
   );
   return sortedReviews.slice(0, REVIEWS_LIST_LENGTH);
 };
+
+export const getRandomInteger = (min: number, max?: number): number => {
+  if(max) {
+    if (min < 0 || max < 0 || min >= max){
+      return -1;
+    }
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  return Math.floor(Math.random() * min);
+};

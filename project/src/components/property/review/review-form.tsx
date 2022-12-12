@@ -3,7 +3,6 @@ import { useAppSelector } from '../../../hooks/use-app-selector';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { getReviewFormBlockedStatus } from '../../../store/property-process/selectors';
 import { sendReviewAction } from '../../../store/property-process/api-actions';
-import { setReviewFormBlocked } from '../../../store/property-process/actions';
 
 import {
   MARKS,
@@ -30,9 +29,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (formData.rating && formData.review) {
-      dispatch(setReviewFormBlocked(true));
-    }
+
     dispatch(sendReviewAction({
       id: selectedOffer,
       rating: +formData.rating,
@@ -64,6 +61,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         type="radio"
         checked={Number(formData.rating) === mark.key}
         onChange={handleFieldChange}
+        disabled={isReviewFormBlocked}
       />
       <label
         htmlFor={`${mark.key}-${getPluralWord(mark.key, 'star')}`}
@@ -99,6 +97,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review}
         onChange={handleFieldChange}
+        disabled={isReviewFormBlocked}
       >
       </textarea>
       <div className="reviews__button-wrapper">

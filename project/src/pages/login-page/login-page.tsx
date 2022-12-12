@@ -6,7 +6,7 @@ import LoginSectionLocations from '../../components/login/login-section-location
 
 export default function LoginPage(): JSX.Element {
   return (
-    <div className="page page--gray page--login">
+    <div className="page page--gray page--login" data-testid="login-page">
       <Helmet>
         <title>Sign in</title>
       </Helmet>

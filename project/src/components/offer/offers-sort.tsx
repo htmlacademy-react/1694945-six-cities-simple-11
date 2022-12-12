@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setActiveSort } from '../../store/offers-process/actions';
+import { setActiveSort } from '../../store/offers-process/offers-process';
 import SortListItem from './sort/offers-sort-list-item';
 
 type OffersSortProps = {

@@ -23,7 +23,7 @@ function MainPage(): JSX.Element {
       ? 'page page--gray page--main'
       : 'page__main page__main--index page__main--index-empty';
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid="main-page">
       <Helmet>
         <title>Main Page</title>
       </Helmet>
