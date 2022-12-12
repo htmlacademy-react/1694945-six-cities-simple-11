@@ -8,7 +8,6 @@ import { Offer } from '../../types/offer';
 const initialState: OffersProcess = {
   offers: [] as Offer[],
   areOffersLoading: false,
-  //hasOffersLoadingError: false,
   activeCity: ACTIVE_CITY,
   activeSort: ACTIVE_SORT
 };
