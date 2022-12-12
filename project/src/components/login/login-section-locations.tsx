@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setActiveCity } from '../../store/offers-process/actions';
+import { setActiveCity } from '../../store/offers-process/offers-process';
 import { getRandomInteger } from '../../utils';
 import { AppRoute, CITIES } from '../../const';
 
