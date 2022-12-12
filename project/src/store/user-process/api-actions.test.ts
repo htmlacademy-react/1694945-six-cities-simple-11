@@ -1,27 +1,27 @@
-import { Action } from "redux";
-import thunk, { ThunkDispatch } from "redux-thunk";
-import { configureMockStore } from "@jedmao/redux-mock-store";
-import MockAdapter from "axios-mock-adapter";
-import { createAPI } from "../../services/api";
+import { Action } from 'redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
+import { configureMockStore } from '@jedmao/redux-mock-store';
+import MockAdapter from 'axios-mock-adapter';
+import { createAPI } from '../../services/api';
 import {
   checkAuthorizeAction,
   loginAction,
   logoutAction
-} from "./api-actions";
-import { AuthData } from "../../types/auth-data";
-import { State } from "../../types/state";
-import { makeFakeUserData } from "../../mocks/mocks";
-import { StatusCodes } from "http-status-codes";
+} from './api-actions';
+import { AuthData } from '../../types/auth-data';
+import { State } from '../../types/state';
+import { makeFakeUserData } from '../../mocks/mocks';
+import { StatusCodes } from 'http-status-codes';
 import {
   APIRoute,
   AUTHORIZATION_TOKEN_KEY_NAME,
   PASSWORD_PATTERN,
-} from "../../const";
-import { internet } from "faker";
+} from '../../const';
+import { internet } from 'faker';
 
 const fakeUserData = makeFakeUserData();
 
-describe("Async actions: userProcess", () => {
+describe('Async actions: userProcess', () => {
   const api = createAPI();
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
@@ -50,7 +50,7 @@ describe("Async actions: userProcess", () => {
     expect(payload).toEqual(fakeUserData);
   });
 
-  it("should save token and load user data when POST /login", async () => {
+  it('should save token and load user data when POST /login', async () => {
     const fakeUser: AuthData = {
       login: internet.email(),
       password: internet.password(8, true, PASSWORD_PATTERN),
@@ -79,7 +79,7 @@ describe("Async actions: userProcess", () => {
     );
   });
 
-  it("should remove token when Delete /logout", async () => {
+  it('should remove token when Delete /logout', async () => {
     mockAPI.onDelete(APIRoute.Logout).reply(StatusCodes.NO_CONTENT);
 
     const store = mockStore();
