@@ -1,0 +1,22 @@
+import { render, screen } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
+import HistoryRouter from '../../components/history-router/history-router';
+import { createMemoryHistory } from 'history';
+import HeaderSvg from './header-svg';
+
+describe('Component: Loader', () => {
+  it('should render correctly', () => {
+    const history = createMemoryHistory();
+
+    render(
+      <HelmetProvider>
+        <HistoryRouter history={history}>
+          <HeaderSvg />
+        </HistoryRouter>
+      </HelmetProvider>
+    );
+
+    const blockElement = screen.getByTestId('header-svg');
+    expect(blockElement).toBeInTheDocument();
+  });
+});
