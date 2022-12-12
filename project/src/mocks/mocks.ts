@@ -49,7 +49,7 @@ export const makeFakeOffer = (): Offer => ({
   price: datatype.number(),
   rating: datatype.number({ min: 1, max: 5, precision: 0.1 }),
   previewImage: image.imageUrl(),
-  images: Array.from({ length: 6 }, () => image.imageUrl()),
+  images: Array.from({ length: 6 }, () => image.imageUrl(260, 200)),
   bedrooms: datatype.number({ min: 1, max: 5 }),
   maxAdults: datatype.number({ min: 1, max: 5 }),
   goods: Array.from({ length: 10 }, () => commerce.product()),
