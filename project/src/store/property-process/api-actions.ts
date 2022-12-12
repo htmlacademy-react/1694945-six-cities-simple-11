@@ -13,7 +13,7 @@ export const fetchSelectedOfferAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/loadSelectedOffer', async (offerId, { extra: api }) => {
+>('data/fetchSelectedOffer', async (offerId, { extra: api }) => {
   const { data } = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
   return data;
 });
