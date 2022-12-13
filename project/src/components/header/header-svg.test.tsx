@@ -15,8 +15,6 @@ describe('Component: Loader', () => {
         </HistoryRouter>
       </HelmetProvider>
     );
-
-    const blockElement = screen.getByTestId('header-svg');
-    expect(blockElement).toBeInTheDocument();
+    expect(screen.getByTestId('header-svg')).toBeInTheDocument();
   });
 });
