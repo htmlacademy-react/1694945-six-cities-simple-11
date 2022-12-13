@@ -7,7 +7,7 @@ type CardNameProps = {
 
 function CardName({ link, title }: CardNameProps) {
   return (
-    <h2 className="place-card__name">
+    <h2 className="place-card__name" data-testid="card-name">
       <Link to={link}>
         {title}
       </Link>

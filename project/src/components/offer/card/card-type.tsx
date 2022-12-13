@@ -4,7 +4,7 @@ type CardTypeProps = {
 };
 function CardType({ type }: CardTypeProps) {
   return (
-    <p className="place-card__type">
+    <p className="place-card__type" data-testid="card-type">
       {ACCOMODAION_TYPES[type as keyof typeof ACCOMODAION_TYPES]}
     </p>
   );

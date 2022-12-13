@@ -8,7 +8,7 @@ type CardPreviewProps = {
 
 function CardPreview({ link, previewImage, title }: CardPreviewProps) {
   return (
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className="cities__image-wrapper place-card__image-wrapper" data-testid="card-preview">
       <Link to={link}>
         <img
           className="place-card__image"
