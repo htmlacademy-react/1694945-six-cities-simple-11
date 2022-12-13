@@ -3,7 +3,7 @@ type NoOffersProps = {
 };
 function NoOffers({ city }: NoOffersProps): JSX.Element {
   return (
-    <div className="cities__places-container cities__places-container--empty container">
+    <div className="cities__places-container cities__places-container--empty container" data-testid="no-offers">
       <section className="cities__no-places">
         <div className="cities__status-wrapper tabs__content">
           <b className="cities__status">No places to stay available</b>
