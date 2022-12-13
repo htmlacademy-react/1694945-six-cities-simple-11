@@ -11,7 +11,7 @@ function PropertyFeatures({
   maxAdults,
 }: PropertyFeaturesProps): JSX.Element {
   return (
-    <ul className="property__features">
+    <ul className="property__features" data-testid="property-features">
       <li className="property__feature property__feature--entire">
         {ACCOMODAION_TYPES[type as keyof typeof ACCOMODAION_TYPES]}
       </li>
