@@ -15,7 +15,6 @@ describe('Component: Loader', () => {
         </HistoryRouter>
       </HelmetProvider>
     );
-    const blockElement = screen.getByAltText('6 cities logo');
-    expect(blockElement).toBeInTheDocument();
+    expect(screen.getByAltText('6 cities logo')).toBeInTheDocument();
   });
 });
