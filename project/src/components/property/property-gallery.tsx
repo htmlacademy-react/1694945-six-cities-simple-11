@@ -3,7 +3,7 @@ type PropertyGalleryProps = {
 };
 function PropertyGallery({ gallery }: PropertyGalleryProps): JSX.Element {
   return (
-    <div className="property__gallery-container container">
+    <div className="property__gallery-container container" data-testid="property-gallery">
       <div className="property__gallery">{gallery}</div>
     </div>
   );

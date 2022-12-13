@@ -10,7 +10,7 @@ function PropertyHost({
 }: PropertyHostProps): JSX.Element {
   const { isPro, avatarUrl, name } = host;
   return (
-    <div className="property__host">
+    <div className="property__host" data-testid="property-host">
       <h2 className="property__host-title">Meet the host</h2>
       <div className="property__host-user user">
         <div
