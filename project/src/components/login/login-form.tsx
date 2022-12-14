@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { LOGIN_FIELDS, PASSWORD_PATTERN, AppRoute } from '../../const';
 import InputField from '../../components/input-field/input-field';
 
-export default function LoginPage(): JSX.Element {
+function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -61,3 +61,4 @@ export default function LoginPage(): JSX.Element {
     </form>
   );
 }
+export default LoginForm;
