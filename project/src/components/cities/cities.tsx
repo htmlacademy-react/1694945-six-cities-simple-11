@@ -15,7 +15,7 @@ function Cities({ cities, activeCity }: CitiesProps): JSX.Element {
     />)
   );
   return (
-    <section className="locations container">
+    <section className="locations container" data-testid="cities">
       <ul className="locations__list tabs__list">
         {citiesListItems}
       </ul>
