@@ -15,7 +15,7 @@ function OffersOther({ offers }: OffersOtherProps): JSX.Element {
     />
   ));
   return (
-    <section className="near-places places">
+    <section className="near-places places" data-testid="offers-other">
       <h2 className="near-places__title">
         Other places in the neighbourhood
       </h2>
