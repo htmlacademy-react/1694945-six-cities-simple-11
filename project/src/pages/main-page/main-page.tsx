@@ -11,7 +11,7 @@ import Header from '../../components/header/header';
 import Nav from '../../components/nav/nav';
 import Cities from '../../components/cities/cities';
 import Loader from '../../components/loader/loader';
-import OffersSection from '../../components/offers/offers';
+import OffersSection from '../../components/offers-section/offers-section';
 
 function MainPage(): JSX.Element {
   const areOffersLoading = useAppSelector(getOffersLoadingStatus);

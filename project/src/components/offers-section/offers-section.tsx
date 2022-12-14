@@ -8,7 +8,7 @@ type OffersProps = {
   offers: Offer[] | null;
 };
 
-function Offers({ activeCity, offers }: OffersProps): JSX.Element {
+function OffersSection({ activeCity, offers }: OffersProps): JSX.Element {
   const areOffersAvailable = offers && offers.length > 0;
   return areOffersAvailable
     ?
@@ -19,4 +19,4 @@ function Offers({ activeCity, offers }: OffersProps): JSX.Element {
     : <NoOffers city={activeCity.name} />;
 }
 
-export default Offers;
+export default OffersSection;
