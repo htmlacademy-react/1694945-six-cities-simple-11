@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { logoutAction } from '../../store/user-process/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
@@ -9,7 +10,7 @@ function UserAuthorized(): JSX.Element {
   const { name, email, avatarUrl } = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
   return (
-    <>
+    < >
       <li className="header__nav-item user">
         <div className="header__nav-profile">
           <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -26,17 +27,17 @@ function UserAuthorized(): JSX.Element {
           </span>
         </div>
       </li>
-      <li className="header__nav-item">
-        <a
+      <li className="header__nav-item" data-testid="user-authorized">
+        <Link
           className="header__nav-link"
-          href={AppRoute.Login}
+          to={AppRoute.Login}
           onClick={(event: MouseEvent) => {
             event.preventDefault();
             dispatch(logoutAction());
           }}
         >
           <span className="header__signout">Sign out</span>
-        </a>
+        </Link>
       </li>
     </>
   );
