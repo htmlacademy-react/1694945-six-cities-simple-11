@@ -5,18 +5,29 @@ import { HelmetProvider } from 'react-helmet-async';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-router/history-router';
 import Map from './map';
-import { makeFakeOffers } from '../../mocks/mocks';
+import { makeFakeOffers, makeFakeOtherOffers, makeFakeReviews } from '../../mocks/mocks';
 import { ACTIVE_CITY, ACTIVE_SORT } from '../../const';
 
 const fakeOffers = makeFakeOffers();
+const fakeOtherOffers = makeFakeOtherOffers();
+const fakeReviews = makeFakeReviews();
 const fakeState = {
   OFFERS: {
     activeCity: ACTIVE_CITY,
     activeSort: ACTIVE_SORT,
     offers: fakeOffers,
     areOffersLoading: false
+  },
+  PROPERTY: {
+    otherOffers: fakeOtherOffers,
+    selectedOffer: fakeOffers[0],
+    reviews: fakeReviews,
+    isSelectedOfferLoading: false,
+    hasSelectedOfferLoadingError: false,
+    isReviewFormBlocked: false
   }
 };
+const areOtherOffersAvailable = fakeState.PROPERTY.otherOffers && fakeState.PROPERTY.otherOffers.length > 0;
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 
@@ -32,7 +43,7 @@ describe('Component: Map', () => {
               className={'cities__map map'}
               location={fakeState.OFFERS.activeCity.location}
               offers={fakeState.OFFERS.offers}
-              selectedOffer={fakeState.OFFERS.offers[0].id}
+              selectedOffer={fakeState.PROPERTY.selectedOffer.id}
             />
           </HelmetProvider>
         </HistoryRouter>
@@ -53,12 +64,14 @@ describe('Component: Map', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <HelmetProvider>
-            <Map
-              className={'property__map map'}
-              location={fakeState.OFFERS.activeCity.location}
-              offers={fakeState.OFFERS.offers}
-              selectedOffer={fakeState.OFFERS.offers[0].id}
-            />
+            {areOtherOffersAvailable && (
+              <Map
+                className={'property__map map'}
+                location={fakeState.OFFERS.activeCity.location}
+                offers={fakeState.PROPERTY.otherOffers}
+                selectedOffer={fakeState.PROPERTY.selectedOffer.id}
+              />
+            )}
           </HelmetProvider>
         </HistoryRouter>
       </Provider>
