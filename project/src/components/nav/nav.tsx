@@ -7,7 +7,7 @@ import UserUnauthorized from '../user-unauthorized/user-unauthorized';
 function Nav(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   return (
-    <nav className="header__nav">
+    <nav className="header__nav" data-testid="nav">
       <ul className="header__nav-list">
         {(authorizationStatus === AuthorizationStatus.Auth) ? (
           <UserAuthorized />
