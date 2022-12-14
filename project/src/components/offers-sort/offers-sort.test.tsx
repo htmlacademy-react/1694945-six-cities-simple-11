@@ -6,17 +6,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-router/history-router';
 import OffersSort from './offers-sort';
-import { makeFakeUserData, makeFakeOffers } from '../../mocks/mocks';
-import { AuthorizationStatus, ACTIVE_CITY, ACTIVE_SORT, SORT_TYPES } from '../../const';
+import { makeFakeOffers } from '../../mocks/mocks';
+import { ACTIVE_CITY, ACTIVE_SORT, SORT_TYPES } from '../../const';
 
-const fakeUserData = makeFakeUserData();
 const fakeOffers = makeFakeOffers();
 
 const fakeState = {
-  USER: {
-    authorizationStatus: AuthorizationStatus.NoAuth,
-    userData: fakeUserData
-  },
   OFFERS: {
     activeCity: ACTIVE_CITY,
     activeSort: ACTIVE_SORT,
