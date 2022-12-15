@@ -32,9 +32,10 @@ function Card({
   const link = `${AppRoute.Room}/${id}`;
   return (
     <article
-      className={className}
+      className={`${className} place-card`}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
+      data-testid="card"
     >
       {isPremium && <CardPremiumMark />}
       <CardPreview

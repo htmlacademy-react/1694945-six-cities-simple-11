@@ -16,7 +16,7 @@ type OffersListProps = {
 
 function OffersList({ offers, city }: OffersListProps): JSX.Element {
   const [activeCard, setActiveCard] = useState(0);
-  const className = 'cities__card place-card';
+  const className = 'cities__card';
   const cards = offers.map((offer) => (
     <Card
       className={className}
