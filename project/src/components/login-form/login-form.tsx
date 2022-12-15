@@ -51,6 +51,7 @@ function LoginForm(): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid="login-form"
     >
       {inputFields}
       <button
