@@ -41,6 +41,7 @@ function LoginForm(): JSX.Element {
       key={field}
       field={field}
       handleFieldChange={handleFieldChange}
+      data-testid={field}
     />
   ));
 

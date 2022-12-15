@@ -9,7 +9,10 @@ function LoginSectionLocations(): JSX.Element {
   const city = CITIES[getRandomInteger(CITIES.length)];
   const clickHandler = () => { dispatch(setActiveCity(city)); };
   return (
-    <section className="locations locations--login locations--current">
+    <section
+      className="locations locations--login locations--current"
+      data-testid="login-section-locations"
+    >
       <div className="locations__item">
         <Link
           className="locations__item-link"
