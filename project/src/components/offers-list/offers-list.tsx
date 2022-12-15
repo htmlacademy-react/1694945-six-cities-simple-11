@@ -28,7 +28,7 @@ function OffersList({ offers, city }: OffersListProps): JSX.Element {
   ));
   const activeSort = useAppSelector(getActiveSortType);
   return (
-    <div className="cities__places-container container">
+    <div className="cities__places-container container" data-testid="offers-list">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
