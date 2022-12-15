@@ -30,13 +30,13 @@ export const makeFakeUserData = (): UserData => ({
   token: datatype.string(),
 });
 
-export const makeFakeLocation = (): Location => ({
+const makeFakeLocation = (): Location => ({
   zoom: datatype.number({ min: 5, max: 15 }),
   latitude: datatype.number({ min: 1, max: 10, precision: 0.0001 }),
   longitude: datatype.number({ min: 1, max: 10, precision: 0.0001 }),
 });
 
-export const makeFakeCity = (): City => ({
+const makeFakeCity = (): City => ({
   name: address.city(),
   location: makeFakeLocation(),
 });
