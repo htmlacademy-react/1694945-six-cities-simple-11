@@ -6,6 +6,7 @@ function Logo(): JSX.Element {
     <Link
       className="header__logo-link header__logo-link--active"
       to={AppRoute.Main}
+      data-testid="logo"
     >
       <img
         className="header__logo"
