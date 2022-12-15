@@ -7,9 +7,10 @@ import PropertyHost from './property-host';
 
 
 const history = createMemoryHistory();
+const offer = makeFakeOffer();
+
 
 describe('Component: PropertyHost', () => {
-  const offer = makeFakeOffer();
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
@@ -24,7 +25,6 @@ describe('Component: PropertyHost', () => {
     expect(screen.getByTestId('property-host')).toBeInTheDocument();
   });
   it('should render with Pro mark correctly', () => {
-    const offer = makeFakeOffer();
     offer.host.isPro = true;
     render(
       <HistoryRouter history={history}>
