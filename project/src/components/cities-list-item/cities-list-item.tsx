@@ -13,7 +13,11 @@ function CitiesListItem({ data, isActive }: CitiesListItemProps): JSX.Element {
     dispatch(setActiveCity(data));
   };
   return (
-    <li key={data.name} className="locations__item">
+    <li
+      key={data.name}
+      className="locations__item"
+      data-testid="city-list-item"
+    >
       <a
         className={`locations__item-link tabs__item${isActive ? ' tabs__item--active' : ''}`}
         {...(isActive ? {} : { href: `#${data.name}` })}
