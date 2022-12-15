@@ -8,12 +8,14 @@ import CardName from '../card-name/card-name';
 import CardType from '../card-type/card-type';
 
 type CardProps = {
+  className: string;
   offer: Offer;
   onMouseOver: () => void;
   onMouseOut: () => void;
 };
 
 function Card({
+  className,
   offer,
   onMouseOver,
   onMouseOut
@@ -30,7 +32,7 @@ function Card({
   const link = `${AppRoute.Room}/${id}`;
   return (
     <article
-      className="cities__card place-card"
+      className={className}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >
