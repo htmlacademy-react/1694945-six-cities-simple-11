@@ -62,6 +62,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         checked={Number(formData.rating) === mark.key}
         onChange={handleFieldChange}
         disabled={isReviewFormBlocked}
+        data-testid="rating"
       />
       <label
         htmlFor={`${mark.key}-${getPluralWord(mark.key, 'star')}`}
@@ -80,6 +81,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid="review-form"
     >
       <label
         className="reviews__label form__label"
@@ -98,6 +100,7 @@ function ReviewForm({ selectedOffer }: ReviewFormProps): JSX.Element {
         value={formData.review}
         onChange={handleFieldChange}
         disabled={isReviewFormBlocked}
+        data-testid="review"
       >
       </textarea>
       <div className="reviews__button-wrapper">
