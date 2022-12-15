@@ -17,6 +17,7 @@ function InputField({ field, handleFieldChange }: InputFieldProps): JSX.Element 
         placeholder={capitalizeString(field)}
         onChange={handleFieldChange}
         required
+        data-testid={field}
       />
     </div>
   );
