@@ -15,8 +15,6 @@ describe('Component: Loader', () => {
         </HistoryRouter>
       </HelmetProvider>
     );
-
-    const blockElement = screen.getByText(/Loading.../i);
-    expect(blockElement).toBeInTheDocument();
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
   });
 });

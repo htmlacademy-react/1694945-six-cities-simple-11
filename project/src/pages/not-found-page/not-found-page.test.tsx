@@ -16,11 +16,8 @@ describe('Component: NotFound', () => {
       </HelmetProvider>
     );
 
-    const headerElement = screen.getByText(/Error 404 — Page Not Found/i);
-    const linkElement = screen.getByText(/Return to Main Page/i);
-
     expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
-    expect(headerElement).toBeInTheDocument();
-    expect(linkElement).toBeInTheDocument();
+    expect(screen.getByText('Error 404 — Page Not Found')).toBeInTheDocument();
+    expect(screen.getByText('Return to Main Page')).toBeInTheDocument();
   });
 });

@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import HeaderSvg from '../../components/header/header-svg';
+import HeaderSvg from '../../components/header-svg/header-svg';
 import Header from '../../components/header/header';
-import LoginSectionForm from '../../components/login/login-section-form';
-import LoginSectionLocations from '../../components/login/login-section-locations';
+import LoginSectionForm from '../../components/login-section-form/login-section-form';
+import LoginSectionLocations from '../../components/login-section-locations/login-section-locations';
 
 export default function LoginPage(): JSX.Element {
   return (

@@ -147,6 +147,5 @@ export const LAYER_OPTION = {
 export const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 export const REQUEST_TIMEOUT = 5000;
 export const AUTHORIZATION_TOKEN_KEY_NAME = 'six-cities-simple-token';
-export const TIMEOUT_SHOW_ERROR = 2000;
 export const LOGIN_FIELDS = Object.freeze(['email', 'password']);
 export const PASSWORD_PATTERN = /^\S*(?=\S{1,})(?=\S*[a-zA-Z])(?=\S*[\d])\S*$/;

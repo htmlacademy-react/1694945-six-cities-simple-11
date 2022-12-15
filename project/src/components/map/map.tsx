@@ -75,6 +75,7 @@ function Map({ className, location, offers, selectedOffer }: MapProps): JSX.Elem
     <section
       ref={mapRef}
       className={className}
+      data-testid="map"
     >
     </section>
   );
