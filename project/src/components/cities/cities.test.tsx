@@ -19,7 +19,7 @@ const fakeState = {
     areOffersLoading: false
   }
 };
-describe('Component: Loader', () => {
+describe('Component: Cities', () => {
   it('should render correctly', () => {
     const store = mockStore(fakeState);
     render(

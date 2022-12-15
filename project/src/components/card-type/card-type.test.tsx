@@ -8,7 +8,7 @@ import CardType from './card-type';
 const { type } = makeFakeOffer();
 const history = createMemoryHistory();
 
-describe('Component: CardPrice', () => {
+describe('Component: CardType', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>

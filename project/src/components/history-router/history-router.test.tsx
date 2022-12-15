@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../history-router/history-router';
 import { createMemoryHistory } from 'history';
 
-describe('Component: EmptyOfferSection', () => {
+describe('Component: HistoryRouter', () => {
   it('component should render correctly', () => {
     const history = createMemoryHistory();
 

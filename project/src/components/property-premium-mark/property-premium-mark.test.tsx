@@ -13,7 +13,7 @@ const offerWithPremiumMark = {
 const { isPremium } = offerWithPremiumMark;
 const history = createMemoryHistory();
 
-describe('Component: PropertyGallery', () => {
+describe('Component: PropertyPremiumMark', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>

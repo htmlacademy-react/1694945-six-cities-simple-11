@@ -4,7 +4,7 @@ import HistoryRouter from '../../components/history-router/history-router';
 import { createMemoryHistory } from 'history';
 import HeaderSvg from './header-svg';
 
-describe('Component: Loader', () => {
+describe('Component: HeaderSvg', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
 

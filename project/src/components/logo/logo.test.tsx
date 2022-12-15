@@ -5,7 +5,7 @@ import HistoryRouter from '../../components/history-router/history-router';
 import { createMemoryHistory } from 'history';
 import Logo from './logo';
 
-describe('Component: Loader', () => {
+describe('Component: Logo', () => {
   it('should render correctly', async () => {
     const history = createMemoryHistory();
 

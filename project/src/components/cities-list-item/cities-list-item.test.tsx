@@ -16,7 +16,7 @@ const fakeState = {
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 
-describe('Component: LocationItem', () => {
+describe('Component: CitiesListItem', () => {
   it('should render not active item correctly', () => {
     const store = mockStore(fakeState);
     const city = CITIES[1];

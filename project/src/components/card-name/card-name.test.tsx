@@ -10,7 +10,7 @@ const { id, title } = makeFakeOffer();
 const link = `${AppRoute.Room}/${id}`;
 const history = createMemoryHistory();
 
-describe('Component: CardPreview', () => {
+describe('Component: CardName', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
